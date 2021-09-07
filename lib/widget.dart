@@ -1,0 +1,77 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:jettaexstores/alertdilog.dart';
+
+
+Widget ProdcutsBoxs(context, String boxname,String rout) {
+  return GestureDetector(
+    onTap: (){
+      Navigator.pushNamed(context, rout);},
+    child: Container(
+      margin: EdgeInsets.all(10),
+      width: MediaQuery.of(context).size.width / 2.3,
+      decoration: BoxDecoration(
+          color: Color(0xffedb54f),
+          borderRadius: BorderRadius.circular(30)),
+      child: Center(
+          child: Text(
+            boxname,
+            style: TextStyle(
+                color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+          )),
+    ),
+  );
+} //Product's container
+
+final CbottomNavigationBar = BottomAppBar(
+
+  child: Container(
+    padding: EdgeInsets.all(5),
+    //height: 56,
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Icon(
+          Icons.wb_incandescent_rounded,
+        ),
+        Icon(
+          Icons.chat,
+        ),
+        Icon(
+          Icons.phone,
+        ),
+        Icon(
+          Icons.settings,
+        ),
+      ],
+    ),
+  ),
+);
+
+final appBar = AppBar(
+  automaticallyImplyLeading: false,
+  title: Text(
+    'Jettaex Store',style: TextStyle(color: Colors.white),
+  ),
+);
+
+Widget Editbutton({double radios, onTap}) {
+  return Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: InkWell(
+      onTap: onTap,
+
+      child: CircleAvatar(
+        radius: radios,
+        child: Icon(
+          Icons.edit,
+          color: Colors.white,
+        ),
+        backgroundColor: Color(0xffedb54f)
+      ),
+    ),
+  );
+}
+
+
+

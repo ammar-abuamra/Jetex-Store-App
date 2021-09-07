@@ -1,0 +1,23 @@
+{
+
+  "StoreName": "متجر جيتكس",
+  "StorePhone": "+9627997",
+  "StoreLocation": "عمان-الاردن",
+  "ProductButton": "المنتجات",
+  "OrderButton": "الطلبات",
+  "ReviewButton": "مراجعة",
+  "InfoButton": "المعلومات",
+  "NotificationNav": "التنبيهات",
+  "ChatNav": "الشات",
+  "CallNav": "اتصل بنا",
+  "SettingsNav": "الاعدادت",
+  "EditDilog": "تعديل",
+  "StoreNameEdit": "تعديل اسم المتجر",
+  "StarsRateEdit": "تعديل تقيم النجوم",
+  "PhoneNumberEdit": "تعديل رقم الهاتف",
+  "StoreLocationEdit": "تعديل موقع المتجر",
+  "PhotoDilog": "تعديل الصوره",
+  "FromGallery": "المعرض",
+  "FromCamera": "الكميرا"
+
+}

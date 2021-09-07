@@ -1,0 +1,22 @@
+{
+  "StoreName": "Jettaex Store",
+  "StorePhone": "+9627997",
+  "StoreLocation": "AMMAN-JORDAN",
+  "ProductButton": "Product",
+  "OrderButton": "Order's",
+  "ReviewButton": "Reviews",
+  "InfoButton": "Info",
+  "NotificationNav": "Notification",
+  "ChatNav": "Chat",
+  "CallNav": "Call Us",
+  "SettingsNav": "Settings",
+  "EditDilog": "Edit",
+  "StoreNameEdit": "Store Name Edit",
+  "StarsRateEdit": "Stars Rate Edit",
+  "PhoneNumberEdit": "Phone Number Edit",
+  "StoreLocationEdit": "Store Location Edit",
+  "PhotoDilog": "Photo Edit",
+  "FromGallery": "From Gallery",
+  "FromCamera": "From Camera"
+
+}
