@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:jettaexstores/Module/PodcutDataList.dart';
 import 'package:jettaexstores/Widget/SlideButton.dart';
+import 'package:jettaexstores/config/Constant.dart';
 import 'package:jettaexstores/widget.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
@@ -11,42 +12,20 @@ class ProscutDitalScreen extends StatefulWidget {
 }
 
 class _ProscutDitalScreenState extends State<ProscutDitalScreen> {
-  void dismissSlidableItem(
-      BuildContext context, int index, SlidableAction action) {
-    setState(() {
-      items.removeAt(index);
-    });
-
-    switch (action) {
-      case SlidableAction.archive:
-        Utils.showSnackBar(context, 'Chat has been archived');
-        break;
-      case SlidableAction.share:
-        Utils.showSnackBar(context, 'Chat has been shared');
-        break;
-      case SlidableAction.more:
-        Utils.showSnackBar(context, 'Selected more');
-        break;
-      case SlidableAction.delete:
-        Utils.showSnackBar(context, 'Chat has been deleted');
-        break;
-    }
-  }
   List<Data> items = List.of(PData.Datas);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: appBar,
-        bottomNavigationBar: CbottomNavigationBar,
+        backgroundColor: SecondryColor,
         body: ListView.separated(
           separatorBuilder: (context, index) => Divider(),
           itemCount:items.length,
           itemBuilder: (context , index ){
             final item = items[index];
             return  SlidableWidget(child: buildListTile(item),
-              onDismissed: (action) =>
-                  dismissSlidableItem(context, index, action),
+
             );
           },
 
@@ -110,8 +89,8 @@ Widget buildListTile(Data item) => Container(
     trailing: Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text('\$ 30',style: TextStyle(color: Colors.white)),
-        Icon(Icons.star,color: Colors.white70,)
+        Text('\$ 30',style: TextStyle(color: SecondryColor)),
+        Icon(Icons.favorite_border,color: Colors.black54,)
       ],
     ),
 
@@ -125,13 +104,13 @@ Widget buildListTile(Data item) => Container(
 
           item.username,
 
-          style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),
+          style: TextStyle(fontWeight: FontWeight.bold,color: SecondryColor),
 
         ),
 
         const SizedBox(height: 4),
 
-        Text(item.message,style: TextStyle(color: Colors.white70),)
+        Text(item.message,style: TextStyle(color: Colors.black54),)
 
       ],
 

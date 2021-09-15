@@ -9,6 +9,7 @@ import 'package:jettaexstores/Screens/InfoScreen.dart';
 import 'package:jettaexstores/Screens/ProdcutDitalScreen.dart';
 import 'package:jettaexstores/Screens/ProdcutScreen.dart';
 import 'package:jettaexstores/alertdilog.dart';
+import 'package:jettaexstores/config/Constant.dart';
 import 'package:jettaexstores/main.dart';
 import 'package:jettaexstores/widget.dart';
 import 'Provider/Localapp.dart';
@@ -35,21 +36,6 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  List<Widget> NavScreen = [
-    ProdcutScreen(),
-    InfoScreen(),
-    ProscutDitalScreen()
-  ];
-
-  int NavIcon = 0;
-
-  void s1(int index) {
-    setState(() {
-
-      NavIcon = index;
-    });
-  }
-
 
 
   Widget buildContainer(BuildContext context) {
@@ -67,7 +53,7 @@ class _HomePageState extends State<HomePage> {
                 'Photo Edit',
                 style: TextStyle(color: Colors.white),
               ),
-              backgroundColor:Color(0xffedb54f),
+              backgroundColor: Color(0xffedb54f),
               radius: 55,
             ),
             buildListTile(
@@ -79,7 +65,6 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-
 
   var lang = sharedPreferences.getString("lang");
 
@@ -106,8 +91,9 @@ class _HomePageState extends State<HomePage> {
     );
 
     return Scaffold(
-      floatingActionButton: cbuildFloatingActionButton(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      backgroundColor: SecondryColor,
+      // floatingActionButton: cbuildFloatingActionButton(),
+      //floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       drawer: TheDrawer(),
       appBar: appBar,
       body: Column(
@@ -120,28 +106,22 @@ class _HomePageState extends State<HomePage> {
                 Container(
                     width: MediaQuery.of(context).size.width,
                     height: (MediaQuery.of(context).size.height -
-                        appBar.preferredSize.height -
-                        MediaQuery.of(context).padding.top -
-                        MediaQuery.of(context).padding.bottom) /
+                            appBar.preferredSize.height -
+                            MediaQuery.of(context).padding.top -
+                            MediaQuery.of(context).padding.bottom) /
                         3.5,
-                    child: _image == null
-                        ? Image.network(
-                      'https://wallpapercave.com/wp/wp7709742.jpg',
-                      fit: BoxFit.cover,
-                    )
-                        : Image.file(
-                      _image,
-                      fit: BoxFit.cover,
-                    )),
+
+                    child: _image == null ? Image.network('https://images-na.ssl-images-amazon.com/images/I/513CiKyzUWL.jpg', fit: BoxFit.cover,) : Image.file(_image, fit: BoxFit.cover,)),
                 Editbutton(
-                    radios: 30,
+                  radios: 15,
                   onTap: () {
                     showDialog(
                         context: context,
                         builder: (BuildContext ctx) {
                           return alertq;
                         });
-                  },),
+                  },
+                ),
                 // Row(children: [
                 //   ElevatedButton(onPressed: ()async{
                 //     await Loca);
@@ -165,9 +145,9 @@ class _HomePageState extends State<HomePage> {
               padding: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
               width: MediaQuery.of(context).size.width,
               height: (MediaQuery.of(context).size.height -
-                  appBar.preferredSize.height -
-                  MediaQuery.of(context).padding.top -
-                  MediaQuery.of(context).padding.bottom) /
+                      appBar.preferredSize.height -
+                      MediaQuery.of(context).padding.top -
+                      MediaQuery.of(context).padding.bottom) /
                   6,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -184,18 +164,18 @@ class _HomePageState extends State<HomePage> {
                           Text(
                             getLang(context, "StoreName"),
                             style: TextStyle(
-                              color: Color(0xffedb54f),
+                                color: Color(0xffedb54f),
                                 fontWeight: FontWeight.bold,
-                                fontSize: 20,
+                                fontSize: 15,
                                 wordSpacing: 4),
                           ),
                           Row(
                             children: [
-                              Icon(Icons.star),
-                              Icon(Icons.star),
-                              Icon(Icons.star),
-                              Icon(Icons.star),
-                              Icon(Icons.star),
+                              Icon(Icons.star,size: 15,),
+                              Icon(Icons.star,size: 15),
+                              Icon(Icons.star,size: 15),
+                              Icon(Icons.star,size: 15),
+                              Icon(Icons.star,size: 15),
                             ],
                           ),
                         ],
@@ -209,7 +189,11 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           Icon(Icons.phone),
                           Text(
-                            getLang(context, "StorePhone"),
+                            getLang(
+                              context,
+                              "StorePhone",
+                            ),
+                            style: TextStyle(color: PrimaryColor),
                           )
                         ],
                       ),
@@ -219,11 +203,12 @@ class _HomePageState extends State<HomePage> {
                           Icon(Icons.add_location_rounded),
                           Text(
                             getLang(context, "StoreLocation"),
+                            style: TextStyle(color: PrimaryColor),
                           ),
                           Expanded(
                               child: SizedBox(
-                                width: 0,
-                              )),
+                            width: 0,
+                          )),
                         ],
                       ),
                     ],
@@ -235,9 +220,9 @@ class _HomePageState extends State<HomePage> {
           Container(
             width: MediaQuery.of(context).size.width,
             height: (MediaQuery.of(context).size.height -
-                appBar.preferredSize.height -
-                MediaQuery.of(context).padding.top -
-                MediaQuery.of(context).padding.bottom) /
+                    appBar.preferredSize.height -
+                    MediaQuery.of(context).padding.top -
+                    MediaQuery.of(context).padding.bottom) /
                 2.5,
             child: GridView(
               children: [
@@ -258,25 +243,8 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: Color(0xffedb54f),
-        unselectedItemColor: Colors.grey,
-        currentIndex: NavIcon,
-        onTap: s1,
-        items: [
-          BottomNavigationBarItem(
-              icon: Icon(Icons.wb_incandescent_rounded),
-              label: getLang(context, "NotificationNav")),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.chat), label: getLang(context, "ChatNav")),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.phone), label: getLang(context, "CallNav")),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.settings),
-              label: getLang(context, "SettingsNav")),
-        ],
-      ),
+    //  bottomNavigationBar:CustomNav(CurrentIndex)
+
     );
   }
 
@@ -285,7 +253,7 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Color(0xffedb54f),
       onPressed: null,
       child: Icon(
-        Icons.home,
+        Icons.home,color: SecondryColor,
       ),
     );
   }

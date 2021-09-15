@@ -17,6 +17,14 @@
   "StoreLocationEdit": "Store Location Edit",
   "PhotoDilog": "Photo Edit",
   "FromGallery": "From Gallery",
-  "FromCamera": "From Camera"
+  "FromCamera": "From Camera",
+  "Category": "Category",
+  "SubCategory": "Sub Category",
+  "ProductCategory": "Product Category",
+  "ProductTiltle": "Product Title",
+  "ProdcutPrice": "Product Price",
+  "ProductDescreption": "Product Descreption",
+  "Save": "SAVE",
+  "AddProductPhoto":"Add Product Photo"
 
 }

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:jettaexstores/Provider/Localapp.dart';
+import 'package:jettaexstores/config/Constant.dart';
 
 
 class PhotoEditDilog extends StatelessWidget {
@@ -34,7 +35,7 @@ class PhotoEditDilog extends StatelessWidget {
       child: Container(
         height: MediaQuery.of(context).size.height*.6,width:MediaQuery.of(context).size.width*.6,
         decoration: BoxDecoration(
-            color: Colors.white,borderRadius: BorderRadius.circular(15)
+            color: SecondryColor,borderRadius: BorderRadius.circular(15)
         ),
         child: Column(
           //mainAxisAlignment: MainAxisAlignment.spaceAround,

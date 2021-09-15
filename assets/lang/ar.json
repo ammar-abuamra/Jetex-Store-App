@@ -18,6 +18,14 @@
   "StoreLocationEdit": "تعديل موقع المتجر",
   "PhotoDilog": "تعديل الصوره",
   "FromGallery": "المعرض",
-  "FromCamera": "الكميرا"
+  "FromCamera": "الكميرا",
+  "Category": "التصنيفات",
+  "SubCategory": "التصنيفات الفرعية",
+  "ProductCategory": "تصنيف المنتج",
+  "ProductTiltle": "اسم المنتج",
+  "ProdcutPrice": "سعر المنتج",
+  "ProductDescreption": "وصف المنتج",
+  "Save": "حفظ",
+  "AddProductPhoto":"اضافة صورة للمنتج"
 
 }

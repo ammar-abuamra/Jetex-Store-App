@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:jettaexstores/Provider/Localapp.dart';
+import 'package:jettaexstores/config/Constant.dart';
 import 'package:jettaexstores/widget.dart';
 
 class SubCategory extends StatelessWidget {
@@ -6,8 +8,8 @@ class SubCategory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: SecondryColor,
       appBar: appBar,
-      bottomNavigationBar: CbottomNavigationBar,
       body: SingleChildScrollView(
       child: Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -39,8 +41,8 @@ Container CategoryContinaer(String st, context) {
       onTap: () {
         Navigator.pushNamed(context, 'ProscutDitalScreen');
       },
-      title: Text(st,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold )),
-      trailing: Icon(Icons.arrow_forward,color: Colors.white,),
+      title: Text(getLang(context, "SubCategory"),style: CategoryTextStyle),
+      trailing: Icon(Icons.arrow_forward,color: SecondryColor,),
 
     ),
   );

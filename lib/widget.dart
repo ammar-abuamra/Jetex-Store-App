@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:jettaexstores/alertdilog.dart';
+import 'package:jettaexstores/config/Constant.dart';
 
 
 Widget ProdcutsBoxs(context, String boxname,String rout) {
@@ -16,8 +17,7 @@ Widget ProdcutsBoxs(context, String boxname,String rout) {
       child: Center(
           child: Text(
             boxname,
-            style: TextStyle(
-                color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+            style: TitlesTextStyle,
           )),
     ),
   );
@@ -49,9 +49,9 @@ final CbottomNavigationBar = BottomAppBar(
 );
 
 final appBar = AppBar(
-  automaticallyImplyLeading: false,
+
   title: Text(
-    'Jettaex Store',style: TextStyle(color: Colors.white),
+    'JETTAEX Store',style: TextStyle(color: SecondryColor),
   ),
 );
 
@@ -65,7 +65,7 @@ Widget Editbutton({double radios, onTap}) {
         radius: radios,
         child: Icon(
           Icons.edit,
-          color: Colors.white,
+          color: SecondryColor,size: 18,
         ),
         backgroundColor: Color(0xffedb54f)
       ),

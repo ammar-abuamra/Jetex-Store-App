@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:jettaexstores/Provider/Localapp.dart';
+import 'package:jettaexstores/config/Constant.dart';
 import 'package:jettaexstores/widget.dart';
 
 class ProdcutScreen extends StatelessWidget {
@@ -8,7 +10,8 @@ class ProdcutScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar,
-      bottomNavigationBar: CbottomNavigationBar,
+      backgroundColor: SecondryColor,
+
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -29,6 +32,7 @@ class ProdcutScreen extends StatelessWidget {
 Container CategoryContinaer(String st, context) {
   return Container(
 
+
     padding: EdgeInsets.all(5),
     margin: EdgeInsets.all(10),
     decoration: BoxDecoration(
@@ -39,8 +43,8 @@ Container CategoryContinaer(String st, context) {
       onTap: () {
         Navigator.pushNamed(context, 'SubCategory');
       },
-      title: Text(st,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold )),
-      trailing: Icon(Icons.arrow_forward,color: Colors.white,),
+      title: Text( getLang(context, "Category"),style: CategoryTextStyle),
+      trailing: Icon(Icons.arrow_forward,color: SecondryColor,),
 
     ),
   );

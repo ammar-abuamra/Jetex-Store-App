@@ -1,8 +1,27 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:jettaexstores/Provider/Localapp.dart';
+import 'package:jettaexstores/config/Constant.dart';
 
 class AddProdcutdilog extends StatelessWidget {
 
+  File image;
+
+  final picker = ImagePicker();
+
+  Future getImage(ImageSource src)async{
+    final pickedFile = await picker.pickImage(source: src);
+    //  setState(() {
+    if (pickedFile !=null){
+      image = File(pickedFile.path);
+      print(pickedFile.path);
+    }else{
+      print('non');
+    }
+    // });
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -13,17 +32,24 @@ class AddProdcutdilog extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          CircleAvatar(child: Text(getLang(context, "EditDilog"),style: TextStyle(color: Colors.white),),backgroundColor: Colors.black,radius: 40,
+          CircleAvatar(child: Text(getLang(context, "EditDilog"),style: TextStyle(color: Colors.white),),backgroundColor: SecondryColor,radius: 40,
           ),
-          buildListTile(Icons.edit, getLang(context, "StoreNameEdit")),
+          buildListTile(context, Icons.image,getLang(context, "FromGallery"), ImageSource.gallery),
+          buildListTile(context, Icons.camera,getLang(context, "FromCamera"),ImageSource.camera),
         ],
       ),
     );
   }
 
-  ListTile buildListTile(IconData icon , String fname) {
+  Widget buildListTile(BuildContext context,IconData icon , String fname ,ImageSource src ) {
     return ListTile(
-      leading:Icon(icon) ,
+      onTap: (){
+        //  setState(() {
+        getImage(src);
+        // });
+        Navigator.of(context).pop();
+      },
+      leading:Icon(icon,color: Color(0xffedb54f),) ,
       title: Text(fname),
 
     );
