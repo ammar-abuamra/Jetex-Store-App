@@ -8,6 +8,7 @@ import 'package:jettaexstores/Screens/ProdcutDitalScreen.dart';
 import 'package:jettaexstores/Screens/SplashScreen.dart';
 import 'package:jettaexstores/Screens/SubCategory.dart';
 import 'package:jettaexstores/Widget/NavBar.dart';
+import 'package:jettaexstores/config/Api_Test.dart';
 import 'package:jettaexstores/config/Constant.dart';
 import 'package:jettaexstores/homepage.dart';
 import 'package:flutter/widgets.dart';
@@ -81,6 +82,7 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       initialRoute: 'SpalshScreen',
       routes: {
+        'Api_test':(context)=> Api_test(),
         'LoginScreen': (context) => LoginScreen(),
         'Home': (context) => Home(),
         'SettingScreen': (context) => SettingScreen(),
