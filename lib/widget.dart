@@ -49,7 +49,7 @@ final CbottomNavigationBar = BottomAppBar(
 );
 
 final appBar = AppBar(
-
+  backgroundColor: PrimaryColor,
   title: Text(
     'JETTAEX Store',style: TextStyle(color: SecondryColor),
   ),

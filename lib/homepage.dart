@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,13 +8,14 @@ import 'package:jettaexstores/Provider/Localapp.dart';
 import 'package:jettaexstores/Screens/Drawer.dart';
 import 'package:jettaexstores/Screens/InfoScreen.dart';
 import 'package:jettaexstores/Screens/ProdcutDitalScreen.dart';
-import 'package:jettaexstores/Screens/ProdcutScreen.dart';
+import 'package:jettaexstores/Screens/CategoryScreen.dart';
 import 'package:jettaexstores/alertdilog.dart';
 import 'package:jettaexstores/config/Constant.dart';
 import 'package:jettaexstores/main.dart';
 import 'package:jettaexstores/widget.dart';
 import 'Provider/Localapp.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
   @override
@@ -37,24 +39,29 @@ class _HomePageState extends State<HomePage> {
   }
 
 
-
   Widget buildContainer(BuildContext context) {
     return Material(
       child: Container(
-        height: MediaQuery.of(context).size.height * .7,
-        width: MediaQuery.of(context).size.width * .7,
+        height: MediaQuery.of(context).size.height * .5,
+        width: MediaQuery.of(context).size.width * .6,
         decoration: BoxDecoration(
-            color: Colors.white, borderRadius: BorderRadius.circular(15)),
+            color: SecondryColor, ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            CircleAvatar(
-              child: Text(
-                'Photo Edit',
-                style: TextStyle(color: Colors.white),
-              ),
-              backgroundColor: Color(0xffedb54f),
-              radius: 55,
+            Container(
+
+              child: Center(
+                  child: Text(
+                  "Change Photo",
+                    style: TextStyle(
+                        color: SecondryColor,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+                  )),
+              decoration: BoxDecoration( borderRadius: BorderRadius.circular(5), color: PrimaryColor,),
+              padding: EdgeInsets.all(5),
+              width: double.infinity,
             ),
             buildListTile(
                 context, Icons.image, 'From Gallery', ImageSource.gallery),
@@ -72,30 +79,36 @@ class _HomePageState extends State<HomePage> {
       BuildContext context, IconData icon, String fname, ImageSource src) {
     return ListTile(
       onTap: () {
+
         getImage(src);
         // });
         Navigator.of(context).pop();
       },
-      leading: Icon(icon),
-      title: Text(fname),
+      leading: Icon(icon,color: PrimaryColor,),
+      title: Text(fname,style: TextStyle(color: PrimaryColor),),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    final AlertDialog alert = AlertDialog(
+    final AlertDialog alert = AlertDialog(backgroundColor: SecondryColor,shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20)),
       content: cad(),
     );
-    final AlertDialog alertq = AlertDialog(
+    final AlertDialog alertq = AlertDialog(backgroundColor: SecondryColor,shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20)),
       content: buildContainer(context),
     );
 
     return Scaffold(
       backgroundColor: SecondryColor,
-      // floatingActionButton: cbuildFloatingActionButton(),
-      //floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       drawer: TheDrawer(),
-      appBar: appBar,
+      appBar: AppBar(
+        backgroundColor: PrimaryColor,
+        title: Text(
+          'JETTAEX Store',style: TextStyle(color: SecondryColor),
+        ),
+      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -122,14 +135,7 @@ class _HomePageState extends State<HomePage> {
                         });
                   },
                 ),
-                // Row(children: [
-                //   ElevatedButton(onPressed: ()async{
-                //     await Loca);
-                //   }, child: Text('English')),
-                //   ElevatedButton(onPressed: ()async{
-                //     await context.setLocale(Locale('ar'));
-                //   }, child: Text('العربيه'))
-                // ],)
+
               ],
             ),
           ),
@@ -243,8 +249,6 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-    //  bottomNavigationBar:CustomNav(CurrentIndex)
-
     );
   }
 

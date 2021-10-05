@@ -11,54 +11,50 @@ class TheDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Drawer(
+      child: Theme(
+        data: Theme.of(context).copyWith(
+          canvasColor:SecondryColor, //This will change the drawer background to blue.
+          //other styles
+        ),
+        child: Drawer(
 
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Container(
-              margin: EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: SecondryColor,
-                borderRadius: BorderRadius.circular(30)
-              ),
-
-              child: ListTile(
-                title: Text('Add Prodct',style: TextStyle(color: PrimaryColor),),
-                leading: Icon(
-                  Icons.add,
-                  color: Color(0xffedb54f),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Container(
+                child:Center(
+                  child: Text('JETTEX STORE',style: TextStyle(
+                      color: SecondryColor,
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold),),
                 ),
-                onTap: () {
-                  Navigator.pushNamed(context, 'AddProdcut');
-                },
+                height: MediaQuery.of(context).size.height * .4,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(bottomRight: Radius.circular(50),bottomLeft:Radius.circular(5) ),
+                  color: PrimaryColor, ),
               ),
-            ),
-            // ListTile(
-            //     leading: Icon(Icons.language,color: Color(0xffedb54f),),
-            //     title: Text('English',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15),),
-            //     onTap: () {
-            //       if (lang.toString() == "en") {
-            //         MyApp.setLocale(context, Locale("en", ""));
-            //       } else {
-            //         MyApp.setLocale(context, Locale("en", ""));
-            //       }
-            //       Navigator.pop(context);
-            //
-            //     }),
-            // ListTile(
-            //     leading: Icon(Icons.language,color: Color(0xffedb54f),),
-            //     title: Text('العربية',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15),),
-            //     onTap: () {
-            //       if (lang.toString() != "ar") {
-            //         MyApp.setLocale(context, Locale("ar", ""));
-            //       } else {
-            //         MyApp.setLocale(context, Locale("ar", ""));
-            //       }
-            //       Navigator.pop(context);
-            //
-            //     }),
-          ],
+              Container(
+                margin: EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: PrimaryColor,
+                  borderRadius: BorderRadius.circular(30)
+                ),
+
+                child: ListTile(
+                  title: Text('Add Prodct',style: TextStyle(color: SecondryColor),),
+                  leading: Icon(
+                    Icons.add,
+                    color: SecondryColor,
+                  ),
+                  onTap: () {
+                    Navigator.pushNamed(context, 'AddProdcut');
+                  },
+                ),
+              ),
+
+            ],
+          ),
         ),
       ),
     );

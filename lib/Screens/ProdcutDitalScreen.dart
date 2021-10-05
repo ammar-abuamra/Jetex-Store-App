@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:jettaexstores/Module/PodcutDataList.dart';
+import 'package:jettaexstores/Module/productjson.dart';
 import 'package:jettaexstores/Widget/SlideButton.dart';
 import 'package:jettaexstores/config/Constant.dart';
 import 'package:jettaexstores/widget.dart';
@@ -19,14 +20,17 @@ class _ProscutDitalScreenState extends State<ProscutDitalScreen> {
 
 
 
-  Future getData()async{
+  Future<List<ProductApi>> _getData() async {
+    String url = 'http://45.76.132.167/api/authentication/productview.php';
+    var response = await http.get(Uri.parse(url));
+    var jsonData = json.decode(response.body);
+    List<ProductApi> products = [];
 
-    String url = 'https://jsonplaceholder.typicode.com/posts';
-    var response =await http.get(Uri.parse(url));
-    var responsebody= jsonDecode(response.body);
-
+    for (var itm in jsonData) {
+      products.add(ProductApi.fromJson(itm));
+    }
+    return products;
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -34,22 +38,65 @@ class _ProscutDitalScreenState extends State<ProscutDitalScreen> {
         appBar: appBar,
         backgroundColor: SecondryColor,
         body: FutureBuilder(
-          future : getData(),
-          builder :(BuildContext context , AsyncSnapshot snapshot){
-
-            return  ListView.separated(
-              separatorBuilder: (context, index) => Divider(),
-              itemCount:items.length,
-              itemBuilder: (context , index ){
-                final item = items[index];
-                return  SlidableWidget(child: buildListTile(item),
-
+            future: _getData(),
+            builder: (BuildContext context, AsyncSnapshot snapshot) {
+              if (snapshot.data == null) {
+                return Center(
+                    child: Container(
+                      child: Text('Loading...'),
+                    ));
+              } else {
+                return ListView.builder(
+                  itemCount: snapshot.data.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return SlidableWidget(
+                      child: Container(
+                        margin: EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                            color: Color(0xffedb54f),
+                            borderRadius: BorderRadiusDirectional.circular(15)),
+                        child: ListTile(
+                          contentPadding: EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 16,
+                          ),
+                          leading: CircleAvatar(
+                              radius: 28, backgroundImage: NetworkImage(snapshot.data[index].image)),
+                          trailing: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text('\$ ${snapshot.data[index].price}',
+                                  style: TextStyle(color: SecondryColor)),
+                              Icon(
+                                Icons.favorite_border,
+                                color: Colors.black54,
+                              )
+                            ],
+                          ),
+                          title: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                snapshot.data[index].nameEn,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: SecondryColor),
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                snapshot.data[index].descriptionEn,
+                                style: TextStyle(color: Colors.black54),
+                              )
+                            ],
+                          ),
+                          onTap: () {},
+                        ),
+                      ),
+                    );
+                  },
                 );
-              },
-
-            )  ;
-          }
-        ),
+              }
+            }),
 
         );
   }
@@ -57,66 +104,6 @@ class _ProscutDitalScreenState extends State<ProscutDitalScreen> {
 
 
 
-Widget buildListTile(Data item) => Container(
-  margin: EdgeInsets.all(5),
-  decoration: BoxDecoration(
-    color: Color(0xffedb54f),
-    borderRadius: BorderRadiusDirectional.circular(15)
-  ),
-  
-  child:   ListTile(
-
-    contentPadding: EdgeInsets.symmetric(
-
-      horizontal: 16,
-
-      vertical: 16,
-
-    ),
-
-    leading: CircleAvatar(
-
-      radius: 28,
-
-      backgroundImage: NetworkImage(item.urlAvatar),
-
-    ),
-    trailing: Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text('\$ 30',style: TextStyle(color: SecondryColor)),
-        Icon(Icons.favorite_border,color: Colors.black54,)
-      ],
-    ),
-
-    title: Column(
-
-      crossAxisAlignment: CrossAxisAlignment.start,
-
-      children: [
-
-        Text(
-
-          item.username,
-
-          style: TextStyle(fontWeight: FontWeight.bold,color: SecondryColor),
-
-        ),
-
-        const SizedBox(height: 4),
-
-        Text(item.message,style: TextStyle(color: Colors.black54),)
-
-      ],
-
-    ),
-
-
-    onTap: () {
-    },
-
-  ),
-);
 
 
 

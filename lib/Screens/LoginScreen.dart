@@ -71,6 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 width: MediaQuery.of(context).size.width * 1,
                 child: TextFormField(
                   // validator: valed,
+
                   controller: StoreEmail,
                   key: EmailState,
                   textAlign: TextAlign.center,
@@ -98,6 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 width: MediaQuery.of(context).size.width * 1,
                 child: TextFormField(
                   // validator: valed,
+
                   controller: StorePassword,
                   key: PasswordState,
                   textAlign: TextAlign.center,
@@ -127,9 +129,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
 
 
-                  loginp(email: StoreEmail.text, password: StorePassword.text)
-                      .login(context)
-                      .then((value) {
+                  loginp(
+                      email: StoreEmail.text, password: StorePassword.text).login(context).then((value) {
                     setState(() {
                       print(value);
                     });
