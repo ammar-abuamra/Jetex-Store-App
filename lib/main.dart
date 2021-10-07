@@ -82,7 +82,7 @@ class _MyAppState extends State<MyApp> {
           buttonColor: Color(0xffedb54f),
           iconTheme: IconThemeData(color: Color(0xffedb54f))),
       debugShowCheckedModeBanner: false,
-      initialRoute: 'Home',
+      initialRoute: 'LoginScreen',
       routes: {
         'Api_test':(context)=> Api_test(),
         'LoginScreen': (context) => LoginScreen(),

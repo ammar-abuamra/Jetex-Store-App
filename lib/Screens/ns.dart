@@ -9,6 +9,7 @@ import 'package:jettaexstores/Module/Info_Api.dart';
 import 'package:jettaexstores/Module/OrderDataList.dart';
 import 'package:jettaexstores/Module/PodcutDataList.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:jettaexstores/main.dart';
 
 
 
@@ -42,8 +43,10 @@ Future upload()async{
   String imagename= _file.path.split("/").last;
   var ure = Uri.http('45.76.132.167', '/api/authentication/insertimage.php');
   final response = await http.post(ure, body: {
-    "image_name":imagename,
-    "image_path":base64,
+    "id": '3',
+    "store_id": '3',
+    "image_name": imagename,
+    "image_path": base64,
 
   });
 

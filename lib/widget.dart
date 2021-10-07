@@ -49,10 +49,10 @@ final CbottomNavigationBar = BottomAppBar(
 );
 
 final appBar = AppBar(
+  foregroundColor: SecondryColor,
   backgroundColor: PrimaryColor,
-  title: Text(
-    'JETTAEX Store',style: TextStyle(color: SecondryColor),
-  ),
+  title: Text('te',style: TextStyle(color: SecondryColor)),
+
 );
 
 Widget Editbutton({double radios, onTap}) {

@@ -10,10 +10,10 @@ class NoteficationScreen extends StatelessWidget {
     return Scaffold(
       drawer: TheDrawer(),
       appBar: AppBar(
-        title: Text(
-          'Notifiction',
-          style: TextStyle(color: SecondryColor),
-        ),
+        foregroundColor: SecondryColor,
+        backgroundColor: PrimaryColor,
+        title: Text('Notification',style: TextStyle(color: SecondryColor)),
+
       ),
       body: SingleChildScrollView(
         child: Column(

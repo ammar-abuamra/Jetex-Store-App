@@ -18,16 +18,12 @@ class InfoScreen extends StatefulWidget {
 }
 
 class _InfoScreenState extends State<InfoScreen> {
-  dynamic userdata;
-
-  Future<List<Infoapi>> _getData() async {
+  dynamic userdata;  Future<List<Infoapi>> _getData() async {
     String url = 'http://45.76.132.167/api/authentication/infoapi.php';
-    var getStore = {"storeID": sharedPreferences.getString("storeID")};
+    var getStore = {
+      "storeID": sharedPreferences.getString("storeID")};
     print(getStore);
-    var response = await http.post(
-      Uri.parse(url),
-      body: getStore,
-    );
+    var response = await http.post(Uri.parse(url), body: getStore,);
     var jsonData = json.decode(response.body);
     List<Infoapi> info = [];
 
@@ -58,17 +54,8 @@ class _InfoScreenState extends State<InfoScreen> {
       appBar: AppBar(
         foregroundColor: SecondryColor,
         backgroundColor: PrimaryColor,
-        title: Text('Insert Data',style: TextStyle(color: SecondryColor)),
-        actions: [
-          IconButton(
-            icon: Icon(
-              Icons.add,color: SecondryColor,
-            ),
-            onPressed: () {
-              phonealertDialog();
-            },
-          ),
-        ],
+        title: Text('Info Screen',style: TextStyle(color: SecondryColor)),
+
       ),
       backgroundColor: SecondryColor,
       body: FutureBuilder(

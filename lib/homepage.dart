@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:jettaexstores/Module/Info_Api.dart';
+import 'package:jettaexstores/Module/mainscreeninfo.dart';
 import 'package:jettaexstores/Provider/Localapp.dart';
 import 'package:jettaexstores/Screens/Drawer.dart';
 import 'package:jettaexstores/Screens/InfoScreen.dart';
@@ -38,6 +40,36 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  dynamic userdata;
+  Future<List<Infoapi>> _getData() async {
+    String url = 'http://45.76.132.167/api/authentication/mainStoreinfo.php?id=';
+    var getStore = {
+      "storeID": sharedPreferences.getString("storeID")};
+    print(getStore);
+    var response = await http.post(Uri.parse(url), body: getStore,);
+    var jsonData = json.decode(response.body);
+    List<Infoapi> info = [];
+
+    for (var itm in jsonData) {
+      info.add(Infoapi.fromJson(itm));
+    }
+    return info;
+  } //with shared pref
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _getData();
+    setdata();
+  }
+
+  void setdata() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    setState(() {
+      userdata = jsonDecode(sharedPreferences.getString("userdata"));
+    });
+  }
 
   Widget buildContainer(BuildContext context) {
     return Material(
@@ -91,10 +123,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final AlertDialog alert = AlertDialog(backgroundColor: SecondryColor,shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20)),
-      content: cad(),
-    );
+
     final AlertDialog alertq = AlertDialog(backgroundColor: SecondryColor,shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20)),
       content: buildContainer(context),
@@ -104,150 +133,149 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: SecondryColor,
       drawer: TheDrawer(),
       appBar: AppBar(
+        foregroundColor: SecondryColor,
         backgroundColor: PrimaryColor,
-        title: Text(
-          'JETTAEX Store',style: TextStyle(color: SecondryColor),
-        ),
+        title: Text('JETTEX STORE',style: TextStyle(color: SecondryColor)),
+
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Container(
-            child: Stack(
-              alignment: Alignment.topRight,
+      body: FutureBuilder(
+        future: _getData(),
+        builder: (BuildContext context, AsyncSnapshot snapshot){
+
+          if (snapshot.data == null) {return Text('eroor');}else {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: (MediaQuery.of(context).size.height -
-                            appBar.preferredSize.height -
-                            MediaQuery.of(context).padding.top -
-                            MediaQuery.of(context).padding.bottom) /
-                        3.5,
+                  child: Stack(
+                    alignment: Alignment.topRight,
+                    children: [
+                      Container(
+                          width: MediaQuery.of(context).size.width,
+                          height: (MediaQuery.of(context).size.height -
+                              appBar.preferredSize.height -
+                              MediaQuery.of(context).padding.top -
+                              MediaQuery.of(context).padding.bottom) /
+                              3.5,
 
-                    child: _image == null ? Image.network('https://images-na.ssl-images-amazon.com/images/I/513CiKyzUWL.jpg', fit: BoxFit.cover,) : Image.file(_image, fit: BoxFit.cover,)),
-                Editbutton(
-                  radios: 15,
-                  onTap: () {
-                    showDialog(
-                        context: context,
-                        builder: (BuildContext ctx) {
-                          return alertq;
-                        });
-                  },
+                          child: _image == null ? Image.network('https://images-na.ssl-images-amazon.com/images/I/513CiKyzUWL.jpg', fit: BoxFit.cover,) : Image.file(_image, fit: BoxFit.cover,)),
+                      Editbutton(
+                        radios: 15,
+                        onTap: () {
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext ctx) {
+                                return alertq;
+                              });
+                        },
+                      ),
+
+                    ],
+                  ),
                 ),
-
-              ],
-            ),
-          ),
-          InkWell(
-            onTap: () {
-              showDialog(
-                  context: context,
-                  builder: (BuildContext ctx) {
-                    return alert;
-                  });
-            },
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
-              width: MediaQuery.of(context).size.width,
-              height: (MediaQuery.of(context).size.height -
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+                  width: MediaQuery.of(context).size.width,
+                  height: (MediaQuery.of(context).size.height -
                       appBar.preferredSize.height -
                       MediaQuery.of(context).padding.top -
                       MediaQuery.of(context).padding.bottom) /
-                  6,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                //للمسافات الي بين اسم المحل و الايقونات والييتختهن
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                      6,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    //للمسافات الي بين اسم المحل و الايقونات والييتختهن
                     children: [
-                      Column(
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            getLang(context, "StoreName"),
-                            style: TextStyle(
-                                color: Color(0xffedb54f),
-                                fontWeight: FontWeight.bold,
-                                fontSize: 15,
-                                wordSpacing: 4),
-                          ),
-                          Row(
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Icon(Icons.star,size: 15,),
-                              Icon(Icons.star,size: 15),
-                              Icon(Icons.star,size: 15),
-                              Icon(Icons.star,size: 15),
-                              Icon(Icons.star,size: 15),
+                              Text(
+                                '${userdata['name_ar']}',
+                                style: TextStyle(
+                                    color: Color(0xffedb54f),
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
+                                    wordSpacing: 4),
+                              ),
+                              Row(
+                                children: [
+                                  Icon(Icons.star,size: 15,),
+                                  Icon(Icons.star,size: 15),
+                                  Icon(Icons.star,size: 15),
+                                  Icon(Icons.star,size: 15),
+                                  Icon(Icons.star,size: 15),
+                                ],
+                              ),
                             ],
                           ),
                         ],
                       ),
-                    ],
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Icon(Icons.phone),
-                          Text(
-                            getLang(
-                              context,
-                              "StorePhone",
-                            ),
-                            style: TextStyle(color: PrimaryColor),
-                          )
-                        ],
-                      ),
-                      Row(
+                      Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Icon(Icons.add_location_rounded),
-                          Text(
-                            getLang(context, "StoreLocation"),
-                            style: TextStyle(color: PrimaryColor),
+                          Row(
+                            children: [
+                              Icon(Icons.phone),
+                              Text(
+
+                                  '${userdata['phone_number']}',
+
+                                style: TextStyle(color: PrimaryColor),
+                              )
+                            ],
                           ),
-                          Expanded(
-                              child: SizedBox(
-                            width: 0,
-                          )),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Icon(Icons.add_location_rounded),
+                              Text(
+                                '${userdata['store_location']}',
+                                style: TextStyle(color: PrimaryColor),
+                              ),
+                              Expanded(
+                                  child: SizedBox(
+                                    width: 0,
+                                  )),
+                            ],
+                          ),
                         ],
-                      ),
+                      )
                     ],
-                  )
-                ],
-              ),
-            ),
-          ),
-          Container(
-            width: MediaQuery.of(context).size.width,
-            height: (MediaQuery.of(context).size.height -
-                    appBar.preferredSize.height -
-                    MediaQuery.of(context).padding.top -
-                    MediaQuery.of(context).padding.bottom) /
-                2.5,
-            child: GridView(
-              children: [
-                ProdcutsBoxs(context, getLang(context, "ProductButton"),
-                    'ProdcutScreen'),
-                ProdcutsBoxs(
-                    context, getLang(context, "OrderButton"), 'OrderScreen'),
-                ProdcutsBoxs(context, getLang(context, "ReviewButton"),
-                    'RevewiesScreen'),
-                ProdcutsBoxs(
-                    context, getLang(context, "InfoButton"), 'InfoScreen'),
+                  ),
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: (MediaQuery.of(context).size.height -
+                      appBar.preferredSize.height -
+                      MediaQuery.of(context).padding.top -
+                      MediaQuery.of(context).padding.bottom) /
+                      2.5,
+                  child: GridView(
+                    children: [
+                      ProdcutsBoxs(context, getLang(context, "ProductButton"),
+                          'ProscutDitalScreen'),
+                      ProdcutsBoxs(
+                          context, getLang(context, "OrderButton"), 'OrderScreen'),
+                      ProdcutsBoxs(context, getLang(context, "ReviewButton"),
+                          'RevewiesScreen'),
+                      ProdcutsBoxs(
+                          context, getLang(context, "InfoButton"), 'InfoScreen'),
+                    ],
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      childAspectRatio: 1.7,
+                    ),
+                  ),
+                ),
               ],
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 1.7,
-              ),
-            ),
-          ),
-        ],
+            );
+          }
+        },
+
       ),
     );
   }

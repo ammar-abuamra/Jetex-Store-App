@@ -12,10 +12,10 @@ class SettingScreen extends StatelessWidget {
     return Scaffold(
       drawer: TheDrawer(),
       appBar: AppBar(
-        title: Text(
-          'Settings',
-          style: TextStyle(color: SecondryColor),
-        ),
+        foregroundColor: SecondryColor,
+        backgroundColor: PrimaryColor,
+        title: Text('Settings',style: TextStyle(color: SecondryColor)),
+
       ),
       backgroundColor: PrimaryColor,
       body: SingleChildScrollView(

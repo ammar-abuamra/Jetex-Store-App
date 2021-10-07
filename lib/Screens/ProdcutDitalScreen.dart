@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:jettaexstores/Module/PodcutDataList.dart';
 import 'package:jettaexstores/Module/productjson.dart';
 import 'package:jettaexstores/Widget/SlideButton.dart';
+import 'package:jettaexstores/alertdilog.dart';
 import 'package:jettaexstores/config/Constant.dart';
 import 'package:jettaexstores/widget.dart';
 import 'package:http/http.dart' as http;
@@ -33,72 +34,95 @@ class _ProscutDitalScreenState extends State<ProscutDitalScreen> {
   }
 
   @override
+  final AlertDialog alert = AlertDialog(backgroundColor: SecondryColor,shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(20)),
+    content: cad(),
+  );
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: appBar,
-        backgroundColor: SecondryColor,
-        body: FutureBuilder(
-            future: _getData(),
-            builder: (BuildContext context, AsyncSnapshot snapshot) {
-              if (snapshot.data == null) {
-                return Center(
-                    child: Container(
-                      child: Text('Loading...'),
-                    ));
-              } else {
-                return ListView.builder(
-                  itemCount: snapshot.data.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return SlidableWidget(
-                      child: Container(
-                        margin: EdgeInsets.all(5),
-                        decoration: BoxDecoration(
-                            color: Color(0xffedb54f),
-                            borderRadius: BorderRadiusDirectional.circular(15)),
-                        child: ListTile(
-                          contentPadding: EdgeInsets.symmetric(
-                            horizontal: 16,
-                            vertical: 16,
-                          ),
-                          leading: CircleAvatar(
-                              radius: 28, backgroundImage: NetworkImage(snapshot.data[index].image)),
-                          trailing: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text('\$ ${snapshot.data[index].price}',
-                                  style: TextStyle(color: SecondryColor)),
-                              Icon(
-                                Icons.favorite_border,
-                                color: Colors.black54,
-                              )
-                            ],
-                          ),
-                          title: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                snapshot.data[index].nameEn,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: SecondryColor),
-                              ),
-                              const SizedBox(height: 4),
-                              Text(
-                                snapshot.data[index].descriptionEn,
-                                style: TextStyle(color: Colors.black54),
-                              )
-                            ],
-                          ),
-                          onTap: () {},
-                        ),
-                      ),
-                    );
-                  },
-                );
-              }
-            }),
+      appBar: AppBar(
+        foregroundColor: SecondryColor,
+        backgroundColor: PrimaryColor,
+        title: Text('Products',style: TextStyle(color: SecondryColor)),
 
-        );
+      ),
+      backgroundColor: SecondryColor,
+      body: FutureBuilder(
+          future: _getData(),
+          builder: (BuildContext context, AsyncSnapshot snapshot) {
+            if (snapshot.data == null) {
+              return Center(
+                  child: Container(
+                    child: Text('Loading...'),
+                  ));
+            } else {
+              return ListView.builder(
+                itemCount: snapshot.data.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return SlidableWidget(
+                    child: Container(
+                      margin: EdgeInsets.all(5),
+                      decoration: BoxDecoration(
+                          color: Color(0xffedb54f),
+                          borderRadius: BorderRadiusDirectional.circular(15)),
+                      child: ListTile(
+                        contentPadding: EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 15,
+                        ),
+                        leading: Container(
+                          height: MediaQuery.of(context).size.height *2,
+                          width: MediaQuery.of(context).size.width * .21,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadiusDirectional.circular(8),
+                              image:DecorationImage(image: NetworkImage(snapshot.data[index].image),fit: BoxFit.fill) ),
+                        ),
+
+                        trailing: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text('Drag ',
+                                style: TextStyle(color: SecondryColor)),
+                            Icon(
+                              Icons.arrow_back,
+                              color: Colors.black54,
+                            )
+                          ],
+                        ),
+                        title: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              snapshot.data[index].nameEn,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: SecondryColor),
+                            ),
+                            const SizedBox(height: 4),
+                            // Text(
+                            //   snapshot.data[index].descriptionEn,
+                            //   style: TextStyle(color: Colors.black54),
+                            // )
+                          ],
+                        ),
+                        onTap: () {
+                          print(snapshot.data[index].id);
+                          print(snapshot.data[index].nameEn);
+                          // showDialog(
+                          //     context: context,
+                          //     builder: (BuildContext ctx) {
+                          //       return alert;
+                          //     });
+                        },
+                      ),
+                    ),
+                  );
+                },
+              );
+            }
+          }),
+
+    );
   }
 }
 

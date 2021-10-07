@@ -47,9 +47,9 @@ class loginp {
       var response = await http.post(url, body: data);
       final result = jsonDecode( response.body );
       String situation = result['result'];
-      String storeID= result['Store']['store_id'];
-      String storeName= result['Store']['name_en'];
-      String userdata= jsonEncode(result['Store']['userdata']);
+      String storeID = result['Store']['store_id'];
+      String storeName = result['Store']['name_en'];
+      String userdata = jsonEncode(result['Store']['userdata']);
 
       Navigator.pop(context);
       if (situation == "1") {

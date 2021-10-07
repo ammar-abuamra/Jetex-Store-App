@@ -29,7 +29,12 @@ class _ProdcutScreenState extends State<ProdcutScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar,
+      appBar: AppBar(
+        foregroundColor: SecondryColor,
+        backgroundColor: PrimaryColor,
+        title: Text('Categorys ',style: TextStyle(color: SecondryColor)),
+
+      ),
       backgroundColor: SecondryColor,
       body: FutureBuilder(
         future: _getData(),
