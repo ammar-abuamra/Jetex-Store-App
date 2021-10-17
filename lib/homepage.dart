@@ -85,7 +85,7 @@ class _HomePageState extends State<HomePage> {
 
               child: Center(
                   child: Text(
-                  "Change Photo",
+                 getLang(context, 'MainPhotodi'),
                     style: TextStyle(
                         color: SecondryColor,
                         fontSize: 20,
@@ -96,9 +96,9 @@ class _HomePageState extends State<HomePage> {
               width: double.infinity,
             ),
             buildListTile(
-                context, Icons.image, 'From Gallery', ImageSource.gallery),
+                context, Icons.image, getLang(context, 'glalrydio'), ImageSource.gallery),
             buildListTile(
-                context, Icons.camera, 'From Camera', ImageSource.camera),
+                context, Icons.camera, getLang(context, 'camdi'), ImageSource.camera),
           ],
         ),
       ),
@@ -142,7 +142,27 @@ class _HomePageState extends State<HomePage> {
         future: _getData(),
         builder: (BuildContext context, AsyncSnapshot snapshot){
 
-          if (snapshot.data == null) {return Text('eroor');}else {
+          if (snapshot.data == null) {return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+
+              children: [
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 10),
+                  padding: EdgeInsets.symmetric(vertical: 15),
+                  height: 60,width: 60,
+                  child: CircularProgressIndicator(
+                    backgroundColor: SecondryColor,
+                    valueColor: AlwaysStoppedAnimation<Color>(PrimaryColor),
+
+                    strokeWidth: 5,
+                  ),
+                ),
+
+                Text( getLang(context, "Indicator"),style: TextStyle(color: PrimaryColor,fontWeight: FontWeight.w800),)
+              ],
+            ),
+          );}else {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [

@@ -70,7 +70,12 @@ class _AddProdcutState extends State<AddProdcut> {
 
     return Scaffold(
       backgroundColor: SecondryColor,
-      appBar: appBar,
+      appBar: AppBar(
+        foregroundColor: SecondryColor,
+        backgroundColor: PrimaryColor,
+        title: Text('Add Product',style: TextStyle(color: SecondryColor)),
+
+      ),
       body: Form(
         child: SingleChildScrollView(
           child: Column(

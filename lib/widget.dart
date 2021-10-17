@@ -13,7 +13,7 @@ Widget ProdcutsBoxs(context, String boxname,String rout) {
       width: MediaQuery.of(context).size.width / 2.3,
       decoration: BoxDecoration(
           color: Color(0xffedb54f),
-          borderRadius: BorderRadius.circular(30)),
+          borderRadius: BorderRadius.circular(15)),
       child: Center(
           child: Text(
             boxname,

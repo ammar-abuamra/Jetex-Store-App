@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:jettaexstores/Module/Info_Api.dart';
 import 'package:jettaexstores/Module/phoneapi.dart';
+import 'package:jettaexstores/Provider/Localapp.dart';
 import 'package:jettaexstores/config/Constant.dart';
 import 'package:jettaexstores/homepage.dart';
 import 'package:jettaexstores/main.dart';
@@ -54,7 +55,7 @@ class _InfoScreenState extends State<InfoScreen> {
       appBar: AppBar(
         foregroundColor: SecondryColor,
         backgroundColor: PrimaryColor,
-        title: Text('Info Screen',style: TextStyle(color: SecondryColor)),
+        title: Text( getLang(context, "Infobar"),style: TextStyle(color: SecondryColor)),
 
       ),
       backgroundColor: SecondryColor,
@@ -63,24 +64,26 @@ class _InfoScreenState extends State<InfoScreen> {
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.data == null) {
             return Center(
-                child: Column(
-              children: [
-                InkWell(
-                    onTap: () {},
-                    child: buildContainer('ADD STORE EMAIL', Icons.email)),
-                //for the fiset email add
-                InkWell(
-                    onTap: () {},
-                    child: buildContainer(
-                        'ADD STORE LOCATION', Icons.location_on)),
-                //for the firset add location
-                InkWell(
-                    onTap: () {
-                      phonealertDialog();
-                    },
-                    child: buildContainer('ADD PHONE NUMBER', Icons.phone)),
-              ],
-            ));
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+
+                children: [
+                  Container(
+                    margin: EdgeInsets.symmetric(vertical: 10),
+                    padding: EdgeInsets.symmetric(vertical: 15),
+                    height: 60,width: 60,
+                    child: CircularProgressIndicator(
+                      backgroundColor: SecondryColor,
+                      valueColor: AlwaysStoppedAnimation<Color>(PrimaryColor),
+
+                      strokeWidth: 5,
+                    ),
+                  ),
+
+                  Text( getLang(context, "Indicator"),style: TextStyle(color: PrimaryColor,fontWeight: FontWeight.w800),)
+                ],
+              ),
+            );
           } else {
             return SingleChildScrollView(
               child: Column(
@@ -98,7 +101,7 @@ class _InfoScreenState extends State<InfoScreen> {
                           borderRadius: BorderRadius.circular(5)),
                       child: ListTile(
                         title: Text(
-                          'Store Name In English  \n    ${userdata['name_en']}',
+                          getLang(context, "InfoStorename") + '\n ${userdata['name_en']}',
                           style: CategoryTextStyle,
                           textAlign: TextAlign.center,
                         ),
@@ -121,7 +124,7 @@ class _InfoScreenState extends State<InfoScreen> {
                           borderRadius: BorderRadius.circular(5)),
                       child: ListTile(
                         title: Text(
-                          'Store Name in Arbic  \n    ${userdata['name_ar']}',
+                          getLang(context, "InfoarStorename") + '\n    ${userdata['name_ar']}',
                           style: CategoryTextStyle,
                           textAlign: TextAlign.center,
                         ),
@@ -144,7 +147,7 @@ class _InfoScreenState extends State<InfoScreen> {
                           borderRadius: BorderRadius.circular(5)),
                       child: ListTile(
                         title: Text(
-                          'Call us on \n   ${userdata['phone_number']}   ',
+                          getLang(context, "InfoCallus") + '\n   ${userdata['phone_number']}   ',
                           style: CategoryTextStyle,
                           textAlign: TextAlign.center,
                         ),
@@ -167,7 +170,7 @@ class _InfoScreenState extends State<InfoScreen> {
                           borderRadius: BorderRadius.circular(5)),
                       child: ListTile(
                         title: Text(
-                          'Contact us on \n ${userdata['store_email']} ',
+                          getLang(context, "InfoEmail") + '\n ${userdata['store_email']} ',
                           style: CategoryTextStyle,
                           textAlign: TextAlign.center,
                         ),
@@ -190,7 +193,7 @@ class _InfoScreenState extends State<InfoScreen> {
                           borderRadius: BorderRadius.circular(5)),
                       child: ListTile(
                         title: Text(
-                          'Our Location \n   ${userdata['store_location']}   ',
+                          getLang(context, "InfoLocation") + '\n  ${userdata['store_location']}   ',
                           style: CategoryTextStyle,
                           textAlign: TextAlign.center,
                         ),
@@ -283,7 +286,7 @@ class _InfoScreenState extends State<InfoScreen> {
                         style: TextStyle(color: PrimaryColor),
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
-                          labelText: 'Edit Phone Number',
+                          labelText:getLang(context, "InfoPhoneEdit"),
                           labelStyle: TextStyle(color: PrimaryColor),
                         ),
                       ),
@@ -305,7 +308,7 @@ class _InfoScreenState extends State<InfoScreen> {
                                 BorderRadius.all(Radius.circular(15))),
                         child: Center(
                             child: Text(
-                          'Save',
+                              getLang(context, "InfoSaveBottn"),
                           style: TextStyle(
                               color: SecondryColor,
                               fontWeight: FontWeight.bold,
@@ -353,7 +356,7 @@ class _InfoScreenState extends State<InfoScreen> {
             child: Form(
               child: Container(
                 height: MediaQuery.of(context).size.height * .4,
-                width: MediaQuery.of(context).size.width * .7,
+                width: MediaQuery.of(context).size.width * .9,
                 decoration: BoxDecoration(
                   color: SecondryColor,
                 ),
@@ -370,7 +373,7 @@ class _InfoScreenState extends State<InfoScreen> {
                         style: TextStyle(color: PrimaryColor),
                         keyboardType: TextInputType.text,
                         decoration: InputDecoration(
-                          labelText: 'EditStore Email',
+                          labelText: getLang(context, "InfoEmailEdit") ,
                           labelStyle: TextStyle(color: PrimaryColor),
                         ),
                       ),
@@ -392,7 +395,7 @@ class _InfoScreenState extends State<InfoScreen> {
                             BorderRadius.all(Radius.circular(15))),
                         child: Center(
                             child: Text(
-                              'Save',
+                              getLang(context, "InfoSaveBottn"),
                               style: TextStyle(
                                   color: SecondryColor,
                                   fontWeight: FontWeight.bold,
@@ -457,7 +460,7 @@ class _InfoScreenState extends State<InfoScreen> {
                         style: TextStyle(color: PrimaryColor),
                         keyboardType: TextInputType.text,
                         decoration: InputDecoration(
-                          labelText: 'Edit English Store Name',
+                          labelText:  getLang(context, "InfoenStoreName"),
                           labelStyle: TextStyle(color: PrimaryColor),
                         ),
                       ),
@@ -479,7 +482,7 @@ class _InfoScreenState extends State<InfoScreen> {
                             BorderRadius.all(Radius.circular(15))),
                         child: Center(
                             child: Text(
-                              'Save',
+                              getLang(context, "InfoSaveBottn"),
                               style: TextStyle(
                                   color: SecondryColor,
                                   fontWeight: FontWeight.bold,
@@ -544,7 +547,7 @@ class _InfoScreenState extends State<InfoScreen> {
                         style: TextStyle(color: PrimaryColor),
                         keyboardType: TextInputType.text,
                         decoration: InputDecoration(
-                          labelText: 'Edit The Arabic Name Store',
+                          labelText:  getLang(context, "InfoenStoreName"),
                           labelStyle: TextStyle(color: PrimaryColor),
                         ),
                       ),
@@ -566,7 +569,7 @@ class _InfoScreenState extends State<InfoScreen> {
                             BorderRadius.all(Radius.circular(15))),
                         child: Center(
                             child: Text(
-                              'Save',
+                              getLang(context, "InfoSaveBottn"),
                               style: TextStyle(
                                   color: SecondryColor,
                                   fontWeight: FontWeight.bold,
@@ -631,7 +634,7 @@ class _InfoScreenState extends State<InfoScreen> {
                         style: TextStyle(color: PrimaryColor),
                         keyboardType: TextInputType.text,
                         decoration: InputDecoration(
-                          labelText: 'Edit The Store Location ',
+                          labelText: getLang(context, "InfoStoreLocation"),
                           labelStyle: TextStyle(color: PrimaryColor),
                         ),
                       ),
@@ -653,7 +656,7 @@ class _InfoScreenState extends State<InfoScreen> {
                             BorderRadius.all(Radius.circular(15))),
                         child: Center(
                             child: Text(
-                              'Save',
+                              getLang(context, "InfoSaveBottn"),
                               style: TextStyle(
                                   color: SecondryColor,
                                   fontWeight: FontWeight.bold,

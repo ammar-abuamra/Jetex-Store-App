@@ -25,6 +25,34 @@
   "ProdcutPrice": "Product Price",
   "ProductDescreption": "Product Descreption",
   "Save": "SAVE",
-  "AddProductPhoto":"Add Product Photo"
+  "AddProductPhoto":"Add Product Photo",
+"LoginWelcome": "Welcome Back !",
+  "LogText": "Log In Into Store",
+  "LogStoreName": "Store Name",
+  "LogStorePass": "Store Password",
+  "LogBotton": "LOGIN",
+  "Indicator": "Loading ... ! ",
+  "Reviewbar": "Reviwes",
+  "Logout": "Log Out",
+  "Jetexdrwerlogo": "JETTEX STORE",
+  "Infobar": "Store Info",
+  "InfoStorename": "English Store Name",
+  "InfoarStorename": "Arabic Store Name",
+  "InfoCallus": "Call Us On",
+  "InfoEmail": "Contact Us On",
+  "InfoLocation": "Our Location",
+  "InfoPhoneEdit": "Phone Number",
+  "InfoEmailEdit": "Store Email",
+  "InfoenStoreName": "En Store Name",
+  "InfoarStoreName": "Ar Store Name",
+  "InfoStoreLocation": "Store Location",
+  "InfoSaveBottn": "Save",
+  "Settingdevbuttn": "App Devlopment",
+  "settingcontactbun": "Contact us ",
+  "MainPhotodi": "Change Store Photo",
+  "glalrydio": "From Gallery",
+  "camdi": "From Camera"
+
+
 
 }

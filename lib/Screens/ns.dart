@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'dart:async';
@@ -9,14 +10,14 @@ import 'package:jettaexstores/Module/Info_Api.dart';
 import 'package:jettaexstores/Module/OrderDataList.dart';
 import 'package:jettaexstores/Module/PodcutDataList.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:jettaexstores/config/Constant.dart';
 import 'package:jettaexstores/main.dart';
-
-
 
 class test extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: MyHomePage(),
     );
   }
@@ -29,77 +30,34 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
-File _file;
-Future InsertImage ()async{
-  final imagefile =await ImagePicker().pickImage(source: ImageSource.gallery );
-  setState(() {
-    _file = File(imagefile.path);
-  });
-}
-
-Future upload()async{
-  if (_file ==null )return ;
-  String base64 = base64Encode(_file.readAsBytesSync());
-  String imagename= _file.path.split("/").last;
-  var ure = Uri.http('45.76.132.167', '/api/authentication/insertimage.php');
-  final response = await http.post(ure, body: {
-    "id": '3',
-    "store_id": '3',
-    "image_name": imagename,
-    "image_path": base64,
-
-  });
-
-  print(response.body);
-
-}
-
+  final categor = ['categor1','categor2','category3','category4'];
+  String  Value;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add photo'),
+        title: Text('order test'),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
+      body:  Center(
+        child: Container(
 
-          InkWell(
-            onTap: (){
-              InsertImage();
-            },
-            child: Container(
-              color: Colors.amber,
-              height: 50,width: 50,
-                      child: Text( 'Get Image '),
+          child: DropdownButton<String>(
+              value: Value,
+              isExpanded: true,
+              icon:Icon(Icons.arrow_drop_down) ,
+              iconSize: 30,
+              onChanged:(Value)=> setState(() =>this.Value =Value),
+              items: categor.map(categoryiteam).toList()
 
-            ),
+
           ),
-
-          Container(
-            height: 300,width: 300,
-            child: _file == null ? Text('Insert image')  : Image.file(_file, fit: BoxFit.cover,)),
-          InkWell(
-            onTap: (){ upload();
-            print(upload);
-
-            },
-            child: Container(
-              color: Colors.amber,
-              height: 50,width: 50,
-              child: Text( 'upload Image '),
-
-            ),
-          ),
-
-
-        ],
-      ),
+        ),
+      )
+      ,
     );
   }
-
-
+DropdownMenuItem<String> categoryiteam(String cat)=>DropdownMenuItem(
+  value:cat ,
+  child: Text(cat,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
+);
 }
-
-

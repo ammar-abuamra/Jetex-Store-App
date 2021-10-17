@@ -3,6 +3,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:jettaexstores/BottomBarScreen/NotifictionScreen.dart';
 import 'package:jettaexstores/Provider/Localapp.dart';
 import 'package:jettaexstores/Screens/AddProdcutScreen.dart';
+import 'package:jettaexstores/Screens/EditProductDetials.dart';
 import 'package:jettaexstores/Screens/LoginScreen.dart';
 import 'package:jettaexstores/Screens/ProdcutDitalScreen.dart';
 import 'package:jettaexstores/Screens/SplashScreen.dart';
@@ -26,6 +27,9 @@ SharedPreferences sharedPreferences;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   sharedPreferences = await SharedPreferences.getInstance();
+
+ var email = sharedPreferences.getString('e');
+ var pass = sharedPreferences.getString('p');
   runApp(MyApp());
 }
 
@@ -82,8 +86,9 @@ class _MyAppState extends State<MyApp> {
           buttonColor: Color(0xffedb54f),
           iconTheme: IconThemeData(color: Color(0xffedb54f))),
       debugShowCheckedModeBanner: false,
-      initialRoute: 'LoginScreen',
+      initialRoute: 'Home',
       routes: {
+        'EditProduct':(context)=> EditProduct(),
         'Api_test':(context)=> Api_test(),
         'LoginScreen': (context) => LoginScreen(),
         'Home': (context) => Home(),

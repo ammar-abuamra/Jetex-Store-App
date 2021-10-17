@@ -17,12 +17,10 @@ class ProscutDitalScreen extends StatefulWidget {
 }
 
 class _ProscutDitalScreenState extends State<ProscutDitalScreen> {
-  List<Data> items = List.of(PData.Datas);
-
 
 
   Future<List<ProductApi>> _getData() async {
-    String url = 'http://45.76.132.167/api/authentication/productview.php';
+    String url = " http://45.76.132.167/api/authentication/productview.php?";
     var response = await http.get(Uri.parse(url));
     var jsonData = json.decode(response.body);
     List<ProductApi> products = [];
@@ -32,15 +30,35 @@ class _ProscutDitalScreenState extends State<ProscutDitalScreen> {
     }
     return products;
   }
+  void showAlertDialog(
+      BuildContext context,
+      String nameen,
+      String namear,
+      String desen,
+      String desar,
+      String imag,
+      String price){
+    final AlertDialog alert = AlertDialog(backgroundColor: SecondryColor,shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20)),
+      content: cad(nameen,namear,desen,desar,imag,price),
+    );
+    showDialog(
+        context: context,
+        builder: (BuildContext ctx) {
+          return alert;
+        });
+  }
 
   @override
-  final AlertDialog alert = AlertDialog(backgroundColor: SecondryColor,shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(20)),
-    content: cad(),
-  );
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(onPressed: (){
+            Navigator.pushNamed(context, 'AddProdcut');
+          }, icon: Icon(Icons.add))
+        ],
         foregroundColor: SecondryColor,
         backgroundColor: PrimaryColor,
         title: Text('Products',style: TextStyle(color: SecondryColor)),
@@ -59,7 +77,38 @@ class _ProscutDitalScreenState extends State<ProscutDitalScreen> {
               return ListView.builder(
                 itemCount: snapshot.data.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return SlidableWidget(
+                  return Slidable(
+                    actionPane: SlidableDrawerActionPane(),
+                    actions: <Widget>[
+                      SlideContiner(Icons.share, Colors.indigo, 'Share'),
+
+                    ],
+                    secondaryActions: <Widget>[
+                      InkWell(
+                          onTap: () {
+                            Navigator.pushNamed(context,'EditProduct',
+
+                                arguments:{
+                                  "id": snapshot.data[index].id,
+                                  "namear": snapshot.data[index].nameAr,
+                                  "nameen": snapshot.data[index].nameEn,
+                                  "image": snapshot.data[index].image,
+                                  "desar": snapshot.data[index].descriptionAr,
+                                  "desen": snapshot.data[index].descriptionEn,
+                                  "price": snapshot.data[index].price,
+
+
+                                }
+
+                            );
+
+
+
+                          },
+                          child: SlideContiner(Icons.edit, Colors.black54, 'Edit')),
+                      SlideContiner(Icons.delete, Colors.red, 'Delete')
+
+                    ],
                     child: Container(
                       margin: EdgeInsets.all(5),
                       decoration: BoxDecoration(
@@ -108,11 +157,20 @@ class _ProscutDitalScreenState extends State<ProscutDitalScreen> {
                         onTap: () {
                           print(snapshot.data[index].id);
                           print(snapshot.data[index].nameEn);
-                          // showDialog(
-                          //     context: context,
-                          //     builder: (BuildContext ctx) {
-                          //       return alert;
-                          //     });
+                          showAlertDialog(context,
+
+                            snapshot.data[index].nameAr,
+                            snapshot.data[index].descriptionEn,
+                            snapshot.data[index].descriptionAr,
+                            snapshot.data[index].price,
+                            snapshot.data[index].nameEn,
+                            snapshot.data[index].image,
+                           );
+                          //showDialog(
+                             // context: context,
+                             // builder: (BuildContext ctx) {
+                               // return alert;
+                              //});
                         },
                       ),
                     ),
@@ -126,6 +184,21 @@ class _ProscutDitalScreenState extends State<ProscutDitalScreen> {
   }
 }
 
+Container SlideContiner(IconData icon , Color color , String txt) {
+  return Container(
+    margin: EdgeInsets.only(left: 5 ,right: 5),
+
+    decoration: BoxDecoration(
+        color: color,
+        borderRadius: BorderRadius.circular(15)),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(icon,color: Colors.white,),
+        Text(txt,style: TextStyle(color: Colors.white),)
+      ],),
+  );
+}
 
 
 

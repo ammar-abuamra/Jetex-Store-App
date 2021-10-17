@@ -1,8 +1,10 @@
 import 'dart:convert';
+import 'package:flutter/painting.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:jettaexstores/Module/reviewapi.dart';
+import 'package:jettaexstores/Provider/Localapp.dart';
 import 'package:jettaexstores/config/Constant.dart';
 import 'package:jettaexstores/widget.dart';
 
@@ -31,16 +33,38 @@ class _RevewiesScreenState extends State<RevewiesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: appBar,
+        appBar: AppBar(
+          foregroundColor: SecondryColor,
+          backgroundColor: PrimaryColor,
+          title: Text(getLang(context, "Reviewbar"),style: TextStyle(color: SecondryColor)),
+
+        ),
         backgroundColor: SecondryColor,
         body: FutureBuilder(
           future: _getData(),
           builder: (BuildContext contetx, AsyncSnapshot snapshot) {
             if (snapshot.data == null) {
               return Center(
-                  child: Container(
-                    child: Text('Loading...'),
-                  ));
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+
+                  children: [
+                    Container(
+                      margin: EdgeInsets.symmetric(vertical: 10),
+                      padding: EdgeInsets.symmetric(vertical: 15),
+                      height: 60,width: 60,
+                      child: CircularProgressIndicator(
+                        backgroundColor: SecondryColor,
+                        valueColor: AlwaysStoppedAnimation<Color>(PrimaryColor),
+
+                        strokeWidth: 5,
+                      ),
+                    ),
+
+                    Text( getLang(context, "Indicator"),style: TextStyle(color: PrimaryColor,fontWeight: FontWeight.w800),)
+                  ],
+                ),
+              );
             } else{  return ListView.builder(
               itemCount: snapshot.data.length,
               itemBuilder: (BuildContext context, int index) {

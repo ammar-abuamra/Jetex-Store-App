@@ -59,6 +59,9 @@ class loginp {
         sharedPreferences.setString("userdata", userdata);
 
 
+        sharedPreferences.setString("Email", email);
+        sharedPreferences.setString("Password", password);
+
 
 
         sharedPreferences.setBool("Remember", true);
