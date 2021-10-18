@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:jettaexstores/Screens/Drawer.dart';
 import 'package:jettaexstores/config/Constant.dart';
 
 
@@ -8,7 +7,6 @@ class NoteficationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: TheDrawer(),
       appBar: AppBar(
         foregroundColor: SecondryColor,
         backgroundColor: PrimaryColor,
@@ -38,16 +36,16 @@ Widget ReveiweCard(String productitle,String prodcutcategory,String ulrim,String
       Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          SizedBox(height:35),
+          SizedBox(height:3),
           Card(
 
-            elevation: 8,
+            elevation: 3,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(32),
+              borderRadius: BorderRadius.circular(4),
             ),
             color:SecondryColor,
             child: Padding(
-              padding: const EdgeInsets.all(10.0),
+              padding: const EdgeInsets.all(4.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[

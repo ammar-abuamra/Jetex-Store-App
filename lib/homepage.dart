@@ -5,12 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:jettaexstores/Module/Info_Api.dart';
-import 'package:jettaexstores/Module/mainscreeninfo.dart';
 import 'package:jettaexstores/Provider/Localapp.dart';
-import 'package:jettaexstores/Screens/Drawer.dart';
-import 'package:jettaexstores/Screens/InfoScreen.dart';
-import 'package:jettaexstores/Screens/ProdcutDitalScreen.dart';
-import 'package:jettaexstores/Screens/CategoryScreen.dart';
 import 'package:jettaexstores/alertdilog.dart';
 import 'package:jettaexstores/config/Constant.dart';
 import 'package:jettaexstores/main.dart';
@@ -18,6 +13,7 @@ import 'package:jettaexstores/widget.dart';
 import 'Provider/Localapp.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
+
 
 class HomePage extends StatefulWidget {
   @override
@@ -74,27 +70,13 @@ class _HomePageState extends State<HomePage> {
   Widget buildContainer(BuildContext context) {
     return Material(
       child: Container(
-        height: MediaQuery.of(context).size.height * .5,
-        width: MediaQuery.of(context).size.width * .6,
+        height: MediaQuery.of(context).size.height * .4,
+        width: MediaQuery.of(context).size.width * .4,
         decoration: BoxDecoration(
             color: SecondryColor, ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Container(
-
-              child: Center(
-                  child: Text(
-                 getLang(context, 'MainPhotodi'),
-                    style: TextStyle(
-                        color: SecondryColor,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
-                  )),
-              decoration: BoxDecoration( borderRadius: BorderRadius.circular(5), color: PrimaryColor,),
-              padding: EdgeInsets.all(5),
-              width: double.infinity,
-            ),
             buildListTile(
                 context, Icons.image, getLang(context, 'glalrydio'), ImageSource.gallery),
             buildListTile(
@@ -131,7 +113,6 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       backgroundColor: SecondryColor,
-      drawer: TheDrawer(),
       appBar: AppBar(
         foregroundColor: SecondryColor,
         backgroundColor: PrimaryColor,
@@ -179,15 +160,39 @@ class _HomePageState extends State<HomePage> {
                               3.5,
 
                           child: _image == null ? Image.network('https://images-na.ssl-images-amazon.com/images/I/513CiKyzUWL.jpg', fit: BoxFit.cover,) : Image.file(_image, fit: BoxFit.cover,)),
-                      Editbutton(
-                        radios: 15,
-                        onTap: () {
-                          showDialog(
-                              context: context,
-                              builder: (BuildContext ctx) {
-                                return alertq;
-                              });
-                        },
+                      Column(
+                        children: [
+                          Editbutton(
+                            radios: 15,
+                            onTap: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext ctx) {
+                                    return alertq;
+                                  });
+                            },
+                          ),
+                          Editbutton(
+                            radios: 15,
+                            onTap: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext ctx) {
+                                    return alertq;
+                                  });
+                            },
+                          ),
+                          Editbutton(
+                            radios: 15,
+                            onTap: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext ctx) {
+                                    return alertq;
+                                  });
+                            },
+                          )
+                        ],
                       ),
 
                     ],
@@ -207,63 +212,49 @@ class _HomePageState extends State<HomePage> {
                     //للمسافات الي بين اسم المحل و الايقونات والييتختهن
                     children: [
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Text(
-                                '${userdata['name_ar']}',
-                                style: TextStyle(
-                                    color: Color(0xffedb54f),
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15,
-                                    wordSpacing: 4),
-                              ),
                               Row(
                                 children: [
-                                  Icon(Icons.star,size: 15,),
-                                  Icon(Icons.star,size: 15),
-                                  Icon(Icons.star,size: 15),
-                                  Icon(Icons.star,size: 15),
-                                  Icon(Icons.star,size: 15),
+                                  Text(
+                                    '${userdata['name_ar']}   ',
+                                    style: TextStyle(
+                                        color: Color(0xffedb54f),
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18,
+                                        wordSpacing: 4),
+                                  ),
+                                  Text(
+                                    '${userdata['name_en']}',
+                                    style: TextStyle(
+                                        color: Color(0xffedb54f),
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18,
+                                        wordSpacing: 4),
+                                  )
+                                ],
+                              ),
+                              SizedBox(height: 8,),
+
+
+                              Row(
+                                children: [
+                                  Icon(Icons.star,size: 17,),
+                                  Icon(Icons.star,size: 17),
+                                  Icon(Icons.star,size: 17),
+                                  Icon(Icons.star,size: 17),
+                                  Icon(Icons.star,size: 17),
                                 ],
                               ),
                             ],
                           ),
                         ],
                       ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              Icon(Icons.phone),
-                              Text(
 
-                                  '${userdata['phone_number']}',
-
-                                style: TextStyle(color: PrimaryColor),
-                              )
-                            ],
-                          ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Icon(Icons.add_location_rounded),
-                              Text(
-                                '${userdata['store_location']}',
-                                style: TextStyle(color: PrimaryColor),
-                              ),
-                              Expanded(
-                                  child: SizedBox(
-                                    width: 0,
-                                  )),
-                            ],
-                          ),
-                        ],
-                      )
                     ],
                   ),
                 ),

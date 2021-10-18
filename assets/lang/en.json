@@ -51,7 +51,17 @@
   "settingcontactbun": "Contact us ",
   "MainPhotodi": "Change Store Photo",
   "glalrydio": "From Gallery",
-  "camdi": "From Camera"
+  "camdi": "From Camera",
+  "Orderbar": "Orders",
+  "pending": "Pending",
+  "Preparing": "Preparing",
+  "Ready": "Ready",
+  "Shipping": "Shipping",
+  "Collecting": "Collecting",
+  "Done": "Done",
+  "Rejected": "Rejected",
+  "Caneled": "Caneled"
+
 
 
 

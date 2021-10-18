@@ -36,12 +36,6 @@ class _SpalshScreenState extends State<SpalshScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
 
-
-                // Container(
-                //   height: MediaQuery.of(context).size.height* .2,
-                //   width: MediaQuery.of(context).size.width,
-                //   child: Image.asset('assets/image/jetta-04.png'),
-                // ),
               ],
             ),
             Container(

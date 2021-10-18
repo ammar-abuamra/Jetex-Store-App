@@ -2,8 +2,7 @@ import 'dart:convert';
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import 'package:jettaexstores/Widget/SlideButton.dart';
+import 'package:jettaexstores/Provider/Localapp.dart';
 import 'package:jettaexstores/config/Constant.dart';
 import 'package:http/http.dart' as http;
 import 'package:jettaexstores/orderApi.dart';
@@ -81,7 +80,7 @@ class _OrderScreenState extends State<OrderScreen> {
       appBar: AppBar(
         foregroundColor: SecondryColor,
         backgroundColor: PrimaryColor,
-        title: Text('Orders',style: TextStyle(color: SecondryColor)),
+        title: Text(getLang(context, 'Orderbar'),style: TextStyle(color: SecondryColor)),
 
       ),
       body: Column(
@@ -104,94 +103,14 @@ class _OrderScreenState extends State<OrderScreen> {
                   children: [
                     Row(
                       children: [
-                        InkWell(
-                            onTap: () {
-                              setState(() {
-                                _getData(pending).then((orderList) {
-                                  setState(() {
-                                    infos = orderList;
-                                  });
-                                });
-                              });
-                            },
-                            child: buildContainer('pending',Color(0xffedb54f))),
-                        InkWell(
-                            onTap: () {
-                              setState(() {
-                                _getData(statusPreparing).then((orderList) {
-                                  setState(() {
-                                    infos = orderList;
-                                  });
-                                });
-                              });
-                            },
-                            child: buildContainer("Preparing",Color(0xffedb54f))),
-                        InkWell(
-                            onTap: () {
-                              setState(() {
-                                _getData(statusReady).then((orderList) {
-                                  setState(() {
-                                    infos = orderList;
-                                  });
-                                });
-                              });
-                            },
-                            child: buildContainer("Ready",Color(0xffedb54f))),
-                        InkWell(
-                            onTap: () {
-                              setState(() {
-                                _getData(statusShipping).then((orderList) {
-                                  setState(() {
-                                    infos = orderList;
-                                  });
-                                });
-                              });
-                            },
-                            child: buildContainer("Shipping",Color(0xffedb54f))),
-                        InkWell(
-                            onTap: () {
-                              setState(() {
-                                _getData(statusCollecting).then((orderList) {
-                                  setState(() {
-                                    infos = orderList;
-                                  });
-                                });
-                              });
-                            },
-                            child: buildContainer("Collecting",Color(0xffedb54f))),
-                        InkWell(
-                            onTap: () {
-                              setState(() {
-                                _getData(statusDone).then((orderList) {
-                                  setState(() {
-                                    infos = orderList;
-                                  });
-                                });
-                              });
-                            },
-                            child: buildContainer("Done",Color(0xffedb54f))),
-                        InkWell(
-                            onTap: () {
-                              setState(() {
-                                _getData(statusRejected).then((orderList) {
-                                  setState(() {
-                                    infos = orderList;
-                                  });
-                                });
-                              });
-                            },
-                            child: buildContainer("Rejected",Colors.redAccent),),
-                        InkWell(
-                            onTap: () {
-                              setState(() {
-                                _getData(statusCanceled).then((orderList) {
-                                  setState(() {
-                                    infos = orderList;
-                                  });
-                                });
-                              });
-                            },
-                            child: buildContainer("Caneled",Colors.redAccent))
+                        statuemethod(pending, getLang(context, 'pending')),
+                        statuemethod(statusPreparing, getLang(context, 'Preparing')),
+                        statuemethod(statusReady, getLang(context, 'Ready')),
+                        statuemethod(statusShipping, getLang(context, 'Shipping')),
+                        statuemethod(statusCollecting, getLang(context, 'Collecting')),
+                        statuemethod(statusDone, getLang(context, 'Done')),
+                        statuemethod(statusRejected, getLang(context, 'Rejected')),
+                        statuemethod(statusCanceled, getLang(context, 'Caneled')),
                       ],
                     ),
                   ],
@@ -200,8 +119,7 @@ class _OrderScreenState extends State<OrderScreen> {
             ),
           ),
 
-          ///هون التاب بار او الايقونات الي فوق
-          //هون الكولوم الي فيه كل اشي بحال بدك تعرض اشي بالنص حطو بعد هذا الكومنت
+
           Container(
             height: MediaQuery.of(context).size.height * .68,
             width: MediaQuery.of(context).size.height * .9,
@@ -329,6 +247,20 @@ class _OrderScreenState extends State<OrderScreen> {
         ],
       ),
     );
+  }
+
+  InkWell statuemethod(int st , String title) {
+    return InkWell(
+                          onTap: () {
+                            setState(() {
+                              _getData(st).then((orderList) {
+                                setState(() {
+                                  infos = orderList;
+                                });
+                              });
+                            });
+                          },
+                          child: buildContainer(title,Color(0xffedb54f)));
   }
 
   Widget buildContainer(String st, Color co) {

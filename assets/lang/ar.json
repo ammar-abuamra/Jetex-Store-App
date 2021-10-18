@@ -52,8 +52,14 @@
   "settingcontactbun": "تواصل معنا ",
   "MainPhotodi": "تغير صورة المتجر",
   "glalrydio": "من المعرض",
-  "camdi": "من الكميرا"
-
-
-
+  "camdi": "من الكميرا",
+  "Orderbar": "الطلبات",
+  "pending": "في الانتظار",
+  "Preparing": "قيد التحضير",
+  "Ready": "جاهزة",
+  "Shipping": "شحن",
+  "Collecting": "تحصيل",
+  "Done": "تم",
+  "Rejected": "المفروضة",
+  "Caneled": "الملغية"
 }

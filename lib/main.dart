@@ -8,7 +8,6 @@ import 'package:jettaexstores/Screens/LoginScreen.dart';
 import 'package:jettaexstores/Screens/ProdcutDitalScreen.dart';
 import 'package:jettaexstores/Screens/SplashScreen.dart';
 import 'package:jettaexstores/Screens/SubCategory.dart';
-import 'package:jettaexstores/Screens/ns.dart';
 import 'package:jettaexstores/Widget/NavBar.dart';
 import 'package:jettaexstores/config/Api_Test.dart';
 import 'package:jettaexstores/config/Constant.dart';

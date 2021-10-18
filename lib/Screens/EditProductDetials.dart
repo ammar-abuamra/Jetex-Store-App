@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:jettaexstores/Module/productjson.dart';
+import 'package:jettaexstores/Module/productlastapi.dart';
 import 'package:jettaexstores/Provider/Localapp.dart';
 import 'package:jettaexstores/config/Constant.dart';
 import 'package:jettaexstores/main.dart';
@@ -97,7 +98,7 @@ class _EditProductState extends State<EditProduct> {
   Widget build(BuildContext context) {
 
     final productdata = ModalRoute.of(context).settings.arguments as Map <String , Object>;
-    Future<String> updat(ProductApi prod) async {
+    Future<String> updat(ProductsApi prod) async {
       var ure = Uri.http('45.76.132.167', '/api/authentication/updatedatainfo.php');
       var data = {
         "id": productdata['id'],
@@ -182,15 +183,15 @@ class _EditProductState extends State<EditProduct> {
               InkWell(
                 onTap: (){
                   setState(() {
-                    ProductApi product=ProductApi(
+                    ProductsApi product=ProductsApi(
                       //image: im.text,
                       //categoryId: ci.text,
                         descriptionAr:der.text ,
                         descriptionEn: den.text,
-                        id: id.text,
+                        //id: id.text,
                         nameAr:ar.text ,
                         //  price2:p2.text ,
-                        price: p1.text,
+                        //rice: p1.text,
                         //status:st.text ,
                         //storeId: sid.text,
                         //subCategoryId: si.text,

@@ -1,8 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:jettaexstores/Provider/Localapp.dart';
-import 'package:jettaexstores/alertdilog.dart';
 import 'package:jettaexstores/config/Constant.dart';
 
 class SlidableWidget<T> extends StatefulWidget {
@@ -20,38 +17,7 @@ class SlidableWidget<T> extends StatefulWidget {
 class _SlidableWidgetState<T> extends State<SlidableWidget<T>> {
   @override
   Widget build(BuildContext context) {
-    // return Slidable(
-    //   actionPane: SlidableDrawerActionPane(),
-    //   child: widget.child,
-    //
-    //   /// left side
-    //   actions: <Widget>[
-    //     SlideContiner(Icons.share, Colors.indigo, 'Share'),
-    //
-    //   ],
-    //
-    //   /// right side
-    //
-    //   secondaryActions: <Widget>[
-    //     InkWell(
-    //         onTap: () {
-    //           Navigator.pushNamed(context,'EditProduct',
-    //
-    //               arguments:{
-    //             "": snapshot.data[index].nameAr,
-    //
-    //               }
-    //
-    //           );
-    //
-    //
-    //
-    //         },
-    //         child: SlideContiner(Icons.edit, Colors.black54, 'Edit')),
-    //     SlideContiner(Icons.delete, Colors.red, 'Delete')
-    //
-    //   ],
-    // );
+
   }
 
   Container SlideContiner(IconData icon , Color color , String txt) {

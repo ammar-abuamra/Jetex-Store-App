@@ -1,16 +1,11 @@
-import 'dart:convert';
-import 'dart:io';
+
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:jettaexstores/Module/productjson.dart';
-import 'package:jettaexstores/Provider/Localapp.dart';
-import 'package:jettaexstores/Widget/AddProdcutScreen%5DDilog.dart';
 import 'package:jettaexstores/config/Constant.dart';
-import 'package:jettaexstores/main.dart';
 import 'package:jettaexstores/widget.dart';
-import 'package:jettaexstores/Module/Info_Api.dart';
+
 
 class theadd {
   var ure = Uri.http('45.76.132.167', '/api/authentication/insertproduct.php');
@@ -36,24 +31,7 @@ class AddProdcut extends StatefulWidget {
 }
 
 class _AddProdcutState extends State<AddProdcut> {
-  // final AlertDialog alert = AlertDialog(
-  //   content: AddProdcutdilog(),
-  // );
 
-  // File _image;
-  // final picker = ImagePicker();
-  //
-  // Future getImage(ImageSource src) async {
-  //   final pickedFile = await picker.pickImage(source: src);
-  //   setState(() {
-  //     if (pickedFile != null) {
-  //       _image = File(pickedFile.path);
-  //       print(pickedFile.path);
-  //     } else {
-  //       print('non');
-  //     }
-  //   });
-  // }
 
   TextEditingController nameen = TextEditingController();
   TextEditingController namear = TextEditingController();

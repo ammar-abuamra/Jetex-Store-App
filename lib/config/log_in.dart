@@ -73,14 +73,14 @@ class loginp {
 
       } else {
         AwesomeDialog(
-          dialogBackgroundColor: PrimaryColor,
+          dialogBackgroundColor: SecondryColor,
           context: context,
           headerAnimationLoop: true,
           dialogType: DialogType.ERROR,
           body: Text(
             "Store Not Found !!",
             style: TextStyle(
-                color: Colors.white, fontWeight: FontWeight.bold, fontSize: 30),
+                color: PrimaryColor, fontWeight: FontWeight.bold, fontSize: 30),
           ),
           autoHide: Duration(seconds: 7),
         )..show();

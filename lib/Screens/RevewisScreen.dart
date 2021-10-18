@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:jettaexstores/Module/reviewapi.dart';
 import 'package:jettaexstores/Provider/Localapp.dart';
 import 'package:jettaexstores/config/Constant.dart';
-import 'package:jettaexstores/widget.dart';
 
 class RevewiesScreen extends StatefulWidget {
   @override

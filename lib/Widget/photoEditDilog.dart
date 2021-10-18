@@ -8,11 +8,6 @@ import 'package:jettaexstores/config/Constant.dart';
 
 class PhotoEditDilog extends StatelessWidget {
 
-//   @override
-//   _PhotoEditDilogState createState() => _PhotoEditDilogState();
-// }
-//
-// class _PhotoEditDilogState extends State<PhotoEditDilog> {
   File image;
 
   final picker = ImagePicker();

@@ -93,116 +93,32 @@ class _InfoScreenState extends State<InfoScreen> {
                     onTap: () {
                       enalertDialog();
                     },
-                    child: Container(
-                      padding: EdgeInsets.all(5),
-                      margin: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                          color: Color(0xffedb54f),
-                          borderRadius: BorderRadius.circular(5)),
-                      child: ListTile(
-                        title: Text(
-                          getLang(context, "InfoStorename") + '\n ${userdata['name_en']}',
-                          style: CategoryTextStyle,
-                          textAlign: TextAlign.center,
-                        ),
-                        leading: Icon(
-                          Icons.title,
-                          color: SecondryColor,
-                        ),
-                      ),
-                    ),
+                    child: infobox(context,  getLang(context, "InfoStorename") + '\n ${userdata['name_en']}' , Icons.font_download_outlined),
                   ), //gor the store en name
                   InkWell(
                     onTap: () {
                       aralertDialog();
                     },
-                    child: Container(
-                      padding: EdgeInsets.all(5),
-                      margin: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                          color: Color(0xffedb54f),
-                          borderRadius: BorderRadius.circular(5)),
-                      child: ListTile(
-                        title: Text(
-                          getLang(context, "InfoarStorename") + '\n    ${userdata['name_ar']}',
-                          style: CategoryTextStyle,
-                          textAlign: TextAlign.center,
-                        ),
-                        leading: Icon(
-                          Icons.title,
-                          color: SecondryColor,
-                        ),
-                      ),
-                    ),
+                    child: infobox(context,  getLang(context, "InfoarStorename") + '\n    ${userdata['name_ar']}' , Icons.title),
                   ),//add and views store name in ar
                   InkWell(
                     onTap: () {
                       phonealertDialog();
                     },
-                    child: Container(
-                      padding: EdgeInsets.all(5),
-                      margin: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                          color: Color(0xffedb54f),
-                          borderRadius: BorderRadius.circular(5)),
-                      child: ListTile(
-                        title: Text(
-                          getLang(context, "InfoCallus") + '\n   ${userdata['phone_number']}   ',
-                          style: CategoryTextStyle,
-                          textAlign: TextAlign.center,
-                        ),
-                        leading: Icon(
-                          Icons.phone,
-                          color: SecondryColor,
-                        ),
-                      ),
-                    ),
+                    child:infobox(context,  getLang(context, "InfoCallus") + '\n   ${userdata['phone_number']}   ' , Icons.phone),
                   ), //add phones numbe  and show them
                   InkWell(
                     onTap: () {
                       emailalertDialog();
                     },
-                    child: Container(
-                      padding: EdgeInsets.all(5),
-                      margin: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                          color: Color(0xffedb54f),
-                          borderRadius: BorderRadius.circular(5)),
-                      child: ListTile(
-                        title: Text(
-                          getLang(context, "InfoEmail") + '\n ${userdata['store_email']} ',
-                          style: CategoryTextStyle,
-                          textAlign: TextAlign.center,
-                        ),
-                        leading: Icon(
-                          Icons.email,
-                          color: SecondryColor,
-                        ),
-                      ),
-                    ),
+                    child:infobox(context, getLang(context, "InfoEmail") + '\n ${userdata['store_email']} ' , Icons.email)  ,
                   ), //add the emailes and show them
                   InkWell(
                     onTap: () {
                       locationalertDialog();
                     },
-                    child: Container(
-                      padding: EdgeInsets.all(5),
-                      margin: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                          color: Color(0xffedb54f),
-                          borderRadius: BorderRadius.circular(5)),
-                      child: ListTile(
-                        title: Text(
-                          getLang(context, "InfoLocation") + '\n  ${userdata['store_location']}   ',
-                          style: CategoryTextStyle,
-                          textAlign: TextAlign.center,
-                        ),
-                        leading: Icon(
-                          Icons.location_on,
-                          color: SecondryColor,
-                        ),
-                      ),
-                    ),
+                    child:infobox(context, getLang(context, "InfoLocation") + '\n  ${userdata['store_location']}   ' , Icons.location_on) ,
+
                   ),//add and view store location
 
 
@@ -214,6 +130,31 @@ class _InfoScreenState extends State<InfoScreen> {
         },
       ),
     );
+  }
+
+  Container infobox(BuildContext context, String title, IconData icon) {
+    return Container(
+                    padding: EdgeInsets.all(5),
+                    margin: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                        color: Color(0xffedb54f),
+                        borderRadius: BorderRadius.circular(5)),
+                    child: ListTile(
+                      title: Text(
+                       title,
+                        style: CategoryTextStyle,
+                        textAlign: TextAlign.center,
+                      ),
+                      leading: Icon(
+                        icon,
+                        color: SecondryColor,
+                      ),
+                      trailing: Icon(
+                        Icons.arrow_right,
+                        color: SecondryColor,
+                      ),
+                    ),
+                  );
   }
 
   Container buildContainer(String st, IconData icon) {
@@ -671,6 +612,4 @@ class _InfoScreenState extends State<InfoScreen> {
           )),
     );
   }
-
-
 }

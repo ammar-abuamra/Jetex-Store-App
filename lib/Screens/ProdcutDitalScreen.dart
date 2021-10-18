@@ -1,12 +1,10 @@
-import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:jettaexstores/Module/PodcutDataList.dart';
-import 'package:jettaexstores/Module/productjson.dart';
-import 'package:jettaexstores/Widget/SlideButton.dart';
+import 'package:jettaexstores/Module/productlastapi.dart';
+import 'package:jettaexstores/Provider/Localapp.dart';
 import 'package:jettaexstores/alertdilog.dart';
 import 'package:jettaexstores/config/Constant.dart';
-import 'package:jettaexstores/widget.dart';
+import 'package:jettaexstores/main.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -19,16 +17,23 @@ class ProscutDitalScreen extends StatefulWidget {
 class _ProscutDitalScreenState extends State<ProscutDitalScreen> {
 
 
-  Future<List<ProductApi>> _getData() async {
-    String url = " http://45.76.132.167/api/authentication/productview.php?";
-    var response = await http.get(Uri.parse(url));
-    var jsonData = json.decode(response.body);
-    List<ProductApi> products = [];
 
-    for (var itm in jsonData) {
-      products.add(ProductApi.fromJson(itm));
+  Future<List<ProductsApi>> _getData() async {
+    var getStoreID = {"storeID": sharedPreferences.getString("storeID")};
+
+    String url =
+        'http://45.76.132.167/api/authentication/productview.php?store_id=' +
+            getStoreID['storeID'].toString();
+
+    var response = await http.get(Uri.parse(url));
+
+    if (response.statusCode == 200) {
+      final List<ProductsApi> productsList = productsApiFromJson(response.body);
+      return productsList;
+    } else {
+      // ignore: deprecated_member_use
+      return List<ProductsApi>();
     }
-    return products;
   }
   void showAlertDialog(
       BuildContext context,
@@ -70,9 +75,26 @@ class _ProscutDitalScreenState extends State<ProscutDitalScreen> {
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.data == null) {
               return Center(
-                  child: Container(
-                    child: Text('Loading...'),
-                  ));
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+
+                  children: [
+                    Container(
+                      margin: EdgeInsets.symmetric(vertical: 10),
+                      padding: EdgeInsets.symmetric(vertical: 15),
+                      height: 60,width: 60,
+                      child: CircularProgressIndicator(
+                        backgroundColor: SecondryColor,
+                        valueColor: AlwaysStoppedAnimation<Color>(PrimaryColor),
+
+                        strokeWidth: 5,
+                      ),
+                    ),
+
+                    Text( getLang(context, "Indicator"),style: TextStyle(color: PrimaryColor,fontWeight: FontWeight.w800),)
+                  ],
+                ),
+              );
             } else {
               return ListView.builder(
                 itemCount: snapshot.data.length,
@@ -110,14 +132,14 @@ class _ProscutDitalScreenState extends State<ProscutDitalScreen> {
 
                     ],
                     child: Container(
-                      margin: EdgeInsets.all(5),
+                      margin: EdgeInsets.symmetric(vertical: 3,horizontal: 5),
                       decoration: BoxDecoration(
                           color: Color(0xffedb54f),
-                          borderRadius: BorderRadiusDirectional.circular(15)),
+                          borderRadius: BorderRadiusDirectional.circular(8)),
                       child: ListTile(
                         contentPadding: EdgeInsets.symmetric(
-                          horizontal: 20,
-                          vertical: 15,
+                          horizontal: 15,
+                          vertical: 8,
                         ),
                         leading: Container(
                           height: MediaQuery.of(context).size.height *2,
@@ -127,17 +149,6 @@ class _ProscutDitalScreenState extends State<ProscutDitalScreen> {
                               image:DecorationImage(image: NetworkImage(snapshot.data[index].image),fit: BoxFit.fill) ),
                         ),
 
-                        trailing: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text('Drag ',
-                                style: TextStyle(color: SecondryColor)),
-                            Icon(
-                              Icons.arrow_back,
-                              color: Colors.black54,
-                            )
-                          ],
-                        ),
                         title: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
