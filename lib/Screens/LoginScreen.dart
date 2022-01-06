@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:jettaexstores/Provider/Localapp.dart';
+import 'package:jettaexstores/Widget/NavBar.dart';
 import 'package:jettaexstores/config/Constant.dart';
 import 'package:jettaexstores/config/log_in.dart';
+import 'package:jettaexstores/homepage.dart';
 import 'package:jettaexstores/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -39,17 +41,22 @@ class _LoginScreenState extends State<LoginScreen> {
                   height: 10,
                 ),
                 InkWell(
-                  onTap: () async{
-
-                           final SharedPreferences logprefs = await SharedPreferences.getInstance();
-                   logprefs.setString('e', StoreEmail.text);  logprefs.setString('p', StorePassword.text);
-                    loginp(
-                        email:logprefs.getString('e'), password: logprefs.getString('p')).login(context).then((value) {
-                      setState(() {
-                        print(value);
-                      });
-                    });
+                  onTap: () {
+                    Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(builder: (_) => Home()));
                   },
+
+                  // onTap: () async{
+                  //
+                  //          final SharedPreferences logprefs = await SharedPreferences.getInstance();
+                  //  logprefs.setString('e', StoreEmail.text);  logprefs.setString('p', StorePassword.text);
+                  //   loginp(
+                  //       email:logprefs.getString('e'), password: logprefs.getString('p')).login(context).then((value) {
+                  //     setState(() {
+                  //       print(value);
+                  //     });
+                  //   });
+                  // },
                   child: loginsavebutton(context),
                 )
               ],

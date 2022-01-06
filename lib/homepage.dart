@@ -123,27 +123,7 @@ class _HomePageState extends State<HomePage> {
         future: _getData(),
         builder: (BuildContext context, AsyncSnapshot snapshot){
 
-          if (snapshot.data == null) {return Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
 
-              children: [
-                Container(
-                  margin: EdgeInsets.symmetric(vertical: 10),
-                  padding: EdgeInsets.symmetric(vertical: 15),
-                  height: 60,width: 60,
-                  child: CircularProgressIndicator(
-                    backgroundColor: SecondryColor,
-                    valueColor: AlwaysStoppedAnimation<Color>(PrimaryColor),
-
-                    strokeWidth: 5,
-                  ),
-                ),
-
-                Text( getLang(context, "Indicator"),style: TextStyle(color: PrimaryColor,fontWeight: FontWeight.w800),)
-              ],
-            ),
-          );}else {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -285,8 +265,7 @@ class _HomePageState extends State<HomePage> {
               ],
             );
           }
-        },
-
+        ,
       ),
     );
   }
